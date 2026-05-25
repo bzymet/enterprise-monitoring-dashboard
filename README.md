@@ -56,7 +56,7 @@ https://bzymet.github.io/enterprise-monitoring-dashboard/
 
 ---
 
-## Vendor Footprint
+## Vendor/User Telemetry Reporting
 
 ![Support Toolkit](VendorBreakout.png)
 
