@@ -44,17 +44,18 @@ https://bzymet.github.io/enterprise-monitoring-dashboard/
 
 ---
 
+## Infrastructure Support Automation Toolkit
+
+![Support Toolkit](SupportTool1.png)
+
+---
+
 ## Latency Analytics Reporting
 
 ![Latency Analytics](UserLatencyReports.png)
 
 ---
 
-## Infrastructure Support Automation Toolkit
-
-![Support Toolkit](SupportTool1.png)
-
----
 
 ## Vendor/User Telemetry Reporting
 
