@@ -85,7 +85,7 @@ A custom-built enterprise support operations platform developed in C# with integ
 
 # Enterprise Support Operations Tool
 
-This tool was designed to centralize commonly used operational functions into a single interface for support engineers and administrators, reducing manual effort and accelerating troubleshooting across distributed enterprise systems.
+This tool was designed to centralize commonly used operational functions into a single interface for SRE teams, support engineers and administrators, reducing manual effort and accelerating troubleshooting across distributed enterprise systems.
 
 ## Key Features
 
