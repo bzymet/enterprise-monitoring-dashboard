@@ -79,19 +79,68 @@ This repository contains sanitized demonstration data only and does not include 
 
 ## Infrastructure Support Automation Toolkit
 
+A custom-built enterprise support operations platform developed in C# with integrated PowerShell automation to streamline infrastructure support workflows, operational visibility, and administrative task automation across Windows environments.
+
 ![Support Toolkit](SupportTool1.png)
+
+# Enterprise Support Operations Tool
+
+This tool was designed to centralize commonly used operational functions into a single interface for support engineers and administrators, reducing manual effort and accelerating troubleshooting across distributed enterprise systems.
+
+## Key Features
+
+* Real-time infrastructure support utilities
+* Integrated PowerShell execution engine
+* Automated operational workflows
+* Multi-tool technician support interface
+* Remote system management capabilities
+* Server health and infrastructure visibility
+* Session and process monitoring
+* Log collection and diagnostic automation
+* Operational reporting and telemetry integration
+* Rapid remediation and support tooling
+
+## Technical Highlights
+
+* Built using C# and Windows Forms/WPF
+* Backend automation powered by PowerShell
+* Dynamic UI-driven operational workflows
+* Integration with enterprise infrastructure tooling
+* Modular utility framework for extensibility
+* Automated data collection and execution pipelines
+* Lightweight deployment architecture
+
+## Purpose
+
+The platform was created to improve operational efficiency, reduce repetitive manual tasks, and provide centralized access to critical support functions used during daily infrastructure operations and incident response activities.
+
+## Technologies Used
+
+* C#
+* .NET
+* PowerShell
+* Windows Administration APIs
+* HTML/CSS Reporting
+* CSV Data Processing
+
+## Notes
+
+All screenshots and demonstration data included in this repository have been sanitized to remove any production-sensitive or identifiable enterprise information.
+
 
 ---
 
 ## Endpoint Experience Analytics & Operational Telemetry
 
-Custom-developed endpoint telemetry reporting platform used to identify network instability, latency conditions, workstation health degradation, VPN issues, wireless signal problems, BIOS lifecycle concerns, and operational performance anomalies across enterprise endpoint environments.
+Custom-developed endpoint telemetry and operational analytics reporting platform designed to identify user experience degradation, network instability, hardware health concerns, latency conditions, power configuration issues, and infrastructure performance anomalies across enterprise workstation environments. Reports are fully automated, and delivered via email, or accessible via custom Web Interface built on IIS/.Net
 
 ![Endpoint Telemetry](DTReports.png)
 
 ---
 
 ## Enterprise Latency Analytics Reporting
+
+Automated infrastructure latency analytics reporting built using PowerShell-based telemetry aggregation and operational performance visualization techniques.
 
 ![Latency Analytics](UserLatencyReports.png)
 
