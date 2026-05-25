@@ -20,7 +20,7 @@ Enterprise infrastructure monitoring platform integrating VMware ESX telemetry, 
 
 ## Dashboard Preview
 
-![Dashboard](dashboard-main.png)
+![Dashboard](Dashboard.png)
 
 ## Features
 
