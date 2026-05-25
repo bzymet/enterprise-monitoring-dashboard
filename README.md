@@ -41,7 +41,7 @@ Enterprise infrastructure monitoring platform integrating VMware ESX telemetry, 
 
 ## Live Dashboard
 
-https://YOURUSERNAME.github.io/REPOSITORYNAME/
+https://bzymet.github.io/enterprise-monitoring-dashboard/
 
 
 
