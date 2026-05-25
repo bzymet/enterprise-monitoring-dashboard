@@ -50,7 +50,7 @@ This repository contains sanitized demonstration data only and does not include 
 ![Server Dashboard](ServerHealth.png)
 
 
-A lightweight enterprise infrastructure monitoring platform built with PowerShell, HTML and CSS that generates real-time operational dashboards for Windows server environments.
+A lightweight enterprise infrastructure monitoring platform built with PowerShell, HTML and CSS that generates real-time operational dashboards for the enterprise server environment.
 
 This project demonstrates automated infrastructure observability workflows including live telemetry collection, threshold-based alerting, KPI aggregation, and dynamic HTML dashboard generation without requiring external monitoring platforms or databases.
 
