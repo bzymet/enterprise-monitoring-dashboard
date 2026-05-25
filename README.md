@@ -50,14 +50,14 @@ https://bzymet.github.io/enterprise-monitoring-dashboard/
 
 ---
 
-## Latency Analytics Reporting
+## Enterprise Latency Analytics Reporting
 
 ![Latency Analytics](UserLatencyReports.png)
 
 ---
 
 
-## Vendor/User Telemetry Reporting
+## Operational Telemetry & Vendor Utilization Reporting
 
 ![Support Toolkit](VendorBreakout.png)
 
