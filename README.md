@@ -57,23 +57,13 @@ This project demonstrates automated infrastructure observability workflows inclu
 Features:
 
 * Real-time server health dashboard
-* CPU, memory, and storage monitoring
+* CPU, memory, storage, and deep system/process level monitoring
 * Auto-refreshing HTML reporting
 * Threshold-based visual alerting
 * Enterprise-style operational reporting
 * Lightweight static web deployment
 * GitHub Pages compatible
 * Responsive dashboard interface
-
-Monitoring Categories:
-
-* CPU utilization
-* Memory utilization
-* Disk space monitoring
-* System uptime
-* Session tracking
-* Process monitoring
-* Infrastructure health scoring
 
 Technology Stack:
 
