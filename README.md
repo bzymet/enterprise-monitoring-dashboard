@@ -59,7 +59,6 @@ Features:
 * Real-time server health dashboard
 * CPU, memory, and storage monitoring
 * Auto-refreshing HTML reporting
-* JSON summary aggregation
 * Threshold-based visual alerting
 * Enterprise-style operational reporting
 * Lightweight static web deployment
@@ -81,8 +80,6 @@ Technology Stack:
 * PowerShell
 * HTML5
 * CSS3
-* JavaScript
-* JSON
 * CSV data pipelines
 
 This repository contains sanitized demonstration data only and does not include production infrastructure information.
