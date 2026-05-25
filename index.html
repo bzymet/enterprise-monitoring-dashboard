@@ -1,0 +1,633 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #050b18;
+    color: white;
+    font-family: 'Segoe UI';
+	padding: 8px;
+}
+
+.dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 175px;
+    background: #07101f;
+    border-right: 1px solid #1c2c49;
+    padding: 25px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar a {
+    display: block;
+    width: 100%;
+    padding: 9px 12px;
+    margin-bottom: 6px;
+    border-radius: 8px;
+    background: #0f1729;
+    border: 1px solid #223657;
+    color: #d7e3ff;
+    text-decoration: none;
+    transition: .2s;
+    box-sizing: border-box;
+    font-size: 13px;
+}
+
+.sidebar a:hover {
+    background: #123c7a;
+    border-color: #2f5fa7;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #4db8ff;
+    margin-bottom: 40px;
+}
+
+.nav-item {
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    background: #0f1729;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.nav-item:hover {
+    background: #123c7a;
+}
+
+.main-content {
+    flex: 1;
+    padding: 24px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.header-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.live-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #00ff99;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.developer-credit {
+    color: #7d8fb3;
+    font-size: 11px;
+    font-weight: normal;
+}
+
+.live-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #00ff99;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ff99;
+}
+
+.kpi-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.kpi-card {
+    flex: 1;
+    background: #0f1729;
+    border: 1px solid #223657;
+    border-radius: 8px;
+    padding: 5px;
+    min-height: 50px;
+}
+
+.kpi-title {
+    color: #8ea5cf;
+    font-size: 11px;
+    line-height: 1.1;
+}
+
+.kpi-value {
+    margin-top: 3px;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.panel {
+    background: linear-gradient(145deg,#0a1224,#09101f);
+    border: 1px solid #1d2b45;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding-left: 8px;
+}
+
+iframe {
+    width: 100%;
+    height: 250px;
+    border: none;
+    background: #050b18;
+	overflow: auto;
+}
+
+.footer {
+    margin-top: 25px;
+    color: #7d8fb3;
+    font-size: 13px;
+}
+
+.status-good {
+    color: #00ff99;
+}
+
+.status-warning {
+    color: #ffaa00;
+}
+
+.status-critical {
+    color: #ff4d4d;
+}
+
+@media screen and (max-width: 1400px)
+{
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+<div class="sidebar">
+
+    <div class="sidebar-title">
+        Monitoring
+    </div>
+
+    <a href="./Latency/latency-report.html" target="_blank">
+        Latency
+    </a>
+
+    <a href="./ESX/esx-report.html" target="_blank">
+        ESX Metrics
+    </a>
+
+    <a href="./Citrix/citrix-report.html" target="_blank">
+        Citrix Status
+    </a>
+
+    <a href="./VMs/vm-report.html" target="_blank">
+        Disk Space
+    </a>
+
+    <a href="./ServerDown/down-report.html" target="_blank">
+        Availability
+    </a>
+
+    <a href="./LowVmem/lowvmem-report.html" target="_blank">
+        Low VMemory
+    </a>
+
+</div>
+
+    <div class="main-content">
+
+<div class="header">
+
+    <div class="header-title">
+        Enterprise Infrastructure Operations Dashboard
+    </div>
+
+<div class="live-indicator">
+
+    <span class="developer-credit">
+        Designed by Brian Zymet
+    </span>
+
+    <div class="live-dot"></div>
+
+    <span>LIVE</span>
+
+</div>
+
+</div>
+
+        <div class="kpi-row">
+
+            <div class="kpi-card">
+
+                <div class="kpi-title">
+                    High Latency Events
+                </div>
+
+                <div class="kpi-value" id="latencyCount">
+                    --
+                </div>
+
+            </div>
+
+            <div class="kpi-card">
+
+                <div class="kpi-title">
+                    ESX High CPU Hosts
+                </div>
+
+                <div class="kpi-value" id="esxHighCpu">
+                    --
+                </div>
+
+            </div>
+
+            <div class="kpi-card">
+
+                <div class="kpi-title">
+                    Unregistered Citrix Servers
+                </div>
+
+                <div class="kpi-value" id="citrixUnregistered">
+                    --
+                </div>
+
+            </div>
+
+            <div class="kpi-card">
+
+                <div class="kpi-title">
+                    Low Disk Space Alerts
+                </div>
+
+                <div class="kpi-value" id="vmLowDisk">
+                    --
+                </div>
+
+            </div>
+			
+			
+			<div class="kpi-card">
+
+    <div class="kpi-title">
+        Low VM Density
+    </div>
+
+    <div class="kpi-value" id="lowVmDensity">
+        --
+    </div>
+
+</div>
+			
+		
+<div class="kpi-card">
+
+    <div class="kpi-title">
+        Low Virtual Memory
+    </div>
+
+    <div class="kpi-value" id="lowVmemAlerts">
+        --
+    </div>
+
+</div>		
+			
+			
+			
+			
+			
+			<div class="kpi-card">
+
+    <div class="kpi-title">
+        Servers Down
+    </div>
+
+    <div class="kpi-value" id="serversDown">
+        --
+    </div>
+
+</div>
+			
+					
+			
+
+            <div class="kpi-card">
+
+                <div class="kpi-title">
+                    Overall System Status
+                </div>
+
+                <div class="kpi-value" id="systemStatus">
+                    --
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="dashboard-grid">
+
+            <div class="panel">
+
+                <iframe
+                    src="./Latency/latency-report.html"
+                    scrolling="yes">
+                </iframe>
+
+            </div>
+
+            <div class="panel">
+
+
+                <iframe
+                    src="./ESX/esx-report.html"
+                    scrolling="yes">
+                </iframe>
+
+            </div>
+
+            <div class="panel">
+
+
+                <iframe
+                    src="./Citrix/citrix-report.html"
+                    scrolling="yes">
+                </iframe>
+
+            </div>
+
+            <div class="panel">
+
+
+                <iframe
+                    src="./VMs/vm-report.html"
+                    scrolling="yes">
+                </iframe>
+
+            </div>
+			
+
+<div class="panel">
+
+
+    <iframe
+        src="./ServerDown/down-report.html"
+        scrolling="yes">
+    </iframe>
+
+</div>
+
+			<div class="panel">
+
+
+    <iframe
+        src="./LowVmem/lowvmem-report.html"
+        scrolling="yes">
+    </iframe>
+
+</div>
+
+        </div>
+		
+		
+		
+		
+		
+		
+		
+
+<div class="footer">
+
+    Auto refresh every 60 seconds
+    Dashboard initialized
+
+</div>
+
+    </div>
+
+</div>
+
+<script>
+
+async function loadDashboardData()
+{
+    try
+    {
+        const latencyResponse =
+            await fetch(
+                './Latency/latency-summary.json?t=' +
+                new Date().getTime()
+            );
+
+        const latencyData =
+            await latencyResponse.json();
+
+        const esxResponse =
+            await fetch(
+                './ESX/esx-summary.json?t=' +
+                new Date().getTime()
+            );
+
+        const esxData =
+            await esxResponse.json();
+
+        const citrixResponse =
+            await fetch(
+                './Citrix/citrix-summary.json?t=' +
+                new Date().getTime()
+            );
+
+        const citrixData =
+            await citrixResponse.json();
+
+        const vmResponse =
+            await fetch(
+                './VMs/vm-summary.json?t=' +
+                new Date().getTime()
+            );
+			
+
+
+        const vmData =
+            await vmResponse.json();
+			
+			
+			// =========================
+// LOAD SERVER DOWN
+// =========================
+
+const downResponse =
+    await fetch(
+        './ServerDown/down-summary.json?t=' +
+        new Date().getTime()
+    );
+
+const downData =
+    await downResponse.json();
+	
+	
+	// =========================
+// LOAD LOW VMEM
+// =========================
+
+const lowVmemResponse =
+    await fetch(
+        './LowVmem/lowvmem-summary.json?t=' +
+        new Date().getTime()
+    );
+
+const lowVmemData =
+    await lowVmemResponse.json();
+	
+
+        document.getElementById('latencyCount').innerText =
+            latencyData.HighLatencyCount;
+
+        document.getElementById('esxHighCpu').innerText =
+            esxData.HighCpuHosts;
+			
+			document.getElementById('lowVmDensity').innerText =
+			esxData.LowVmHosts;
+
+        document.getElementById('citrixUnregistered').innerText =
+            citrixData.UnregisteredMachines;
+
+        document.getElementById('vmLowDisk').innerText =
+            vmData.LowDiskAlerts;
+			
+			document.getElementById('serversDown').innerText =
+    downData.DownServers;
+	
+	document.getElementById('lowVmemAlerts').innerText =
+    lowVmemData.LowVmemAlerts;
+
+        console.log(latencyData);
+console.log(esxData);
+console.log(citrixData);
+console.log(vmData);
+console.log(downData);
+console.log(lowVmemData);
+		
+		
+		let overallStatus = "HEALTHY";
+		
+        if (
+            latencyData.Status === "CRITICAL" ||
+            esxData.Status === "CRITICAL" ||
+            citrixData.Status === "CRITICAL" ||
+			vmData.Status === "CRITICAL" ||
+			downData.Status === "CRITICAL" ||
+			lowVmemData.Status === "CRITICAL"
+        )
+        {
+            overallStatus = "CRITICAL";
+        }
+        else if (
+            latencyData.Status === "WARNING" ||
+            esxData.Status === "WARNING" ||
+            citrixData.Status === "WARNING" ||
+            vmData.Status === "WARNING" ||
+			downData.Status === "WARNING" ||
+			lowVmemData.Status === "WARNING"
+        )
+        {
+            overallStatus = "WARNING";
+        }
+
+        const statusElement =
+            document.getElementById('systemStatus');
+
+        statusElement.innerText = overallStatus;
+
+        statusElement.classList.remove(
+            'status-good',
+            'status-warning',
+            'status-critical'
+        );
+
+        if (overallStatus === 'CRITICAL')
+        {
+            statusElement.classList.add('status-critical');
+        }
+        else if (overallStatus === 'WARNING')
+        {
+            statusElement.classList.add('status-warning');
+        }
+        else
+        {
+            statusElement.classList.add('status-good');
+        }
+
+    }
+    catch (error)
+    {
+        console.error('Dashboard load error:', error);
+
+        const statusElement =
+            document.getElementById('systemStatus');
+
+        statusElement.innerText = 'ERROR';
+
+        statusElement.classList.add('status-critical');
+    }
+}
+
+loadDashboardData();
+
+setInterval(loadDashboardData, 60000);
+
+</script>
+
+</body>
+</html>
+```

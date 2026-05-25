@@ -1,0 +1,260 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta http-equiv="refresh" content="60">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Latency Dashboard</title>
+
+<style>
+html {
+    zoom: 60%;
+}
+
+
+body {
+    background-color: #050b18;
+    color: white;
+    font-family: 'Segoe UI';
+    margin: 0;
+    padding: 6px;
+}
+
+.dashboard-container {
+    background: linear-gradient(145deg,#0a1224,#09101f);
+    border: 1px solid #1d2b45;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 0 30px rgba(0,0,0,.5);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.live-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #00ff99;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.live-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #00ff99;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ff99;
+}
+
+
+.kpi-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.kpi-card {
+    flex: 1;
+    background: #0f1729;
+    border: 1px solid #223657;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.kpi-title {
+    color: #8ea5cf;
+    font-size: 14px;
+}
+
+.kpi-value {
+    margin-top: 4px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.status {
+    color: #00ff99;
+}
+
+.status-warning {
+    color: #ffaa00;
+}
+
+.status-critical {
+    color: #ff4d4d;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #123c7a;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+td {
+    padding: 14px;
+    border-bottom: 1px solid #1d2b45;
+}
+
+tr:hover {
+    background: rgba(255,255,255,.03);
+}
+
+.critical {
+    color: #ff4d4d;
+    font-weight: bold;
+}
+
+.warning {
+    color: #ffaa00;
+    font-weight: bold;
+}
+
+.footer {
+    margin-top: 20px;
+    color: #7d8fb3;
+    font-size: 11px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <div class="header">
+
+        <div class="title">
+            NETWORK LATENCY STATUS
+        </div>
+
+        <div class="live-indicator">
+            <div class="live-dot"></div>
+            <span>LIVE</span>
+        </div>
+
+    </div>
+
+    <div class="kpi-row">
+
+        <div class="kpi-card">
+            <div class="kpi-title">
+                High Latency Events
+            </div>
+
+            <div class="kpi-value">
+                3
+            </div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-title">
+                Worst Latency
+            </div>
+
+            <div class="kpi-value">
+                588 ms
+            </div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-title">
+                Average Latency
+            </div>
+
+            <div class="kpi-value">
+                515 ms
+            </div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-title">
+                Overall Status
+            </div>
+
+            <div class="kpi-value status-warning">
+                WARNING
+            </div>
+        </div>
+
+    </div>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>URL</th>
+                    <th>Status Code</th>
+                    <th>Latency</th>
+                    <th>Severity</th>
+                    <th>DateTime</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+    <td>HRservicing.internal.com</td>
+    <td>200</td>
+    <td>588 ms</td>
+    <td class='warning'>WARNING</td>
+    <td>02-10-11-00-2026</td>
+</tr> <tr>
+    <td>creditservicing.internal.com</td>
+    <td>200</td>
+    <td>535 ms</td>
+    <td class='warning'>WARNING</td>
+    <td>02-10-11-00-2026</td>
+</tr> <tr>
+    <td>mailservicing.internal.com</td>
+    <td>200</td>
+    <td>422 ms</td>
+    <td class='elevated'>ELEVATED</td>
+    <td>02-10-11-00-2026</td>
+</tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div class="footer">
+
+        Auto-refresh every 60 seconds |
+        Generated: 05/24/2026 15:40:17
+
+    </div>
+
+</div>
+
+</body>
+</html>
+

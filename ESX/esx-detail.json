@@ -1,0 +1,26 @@
+﻿[
+    {
+        "Cluster":  "Cluster02",
+        "Name":  "ESXHost23",
+        "CpuUsage":  99.19,
+        "MemoryUsage":  48.47,
+        "NumVM":  10,
+        "AlertType":  "HIGH CPU"
+    },
+    {
+        "Cluster":  "Cluster03",
+        "Name":  "ESXHost32",
+        "CpuUsage":  17.59,
+        "MemoryUsage":  18.77,
+        "NumVM":  2,
+        "AlertType":  "LOW VM COUNT"
+    },
+    {
+        "Cluster":  "Cluster04",
+        "Name":  "ESXHost44",
+        "CpuUsage":  95.91,
+        "MemoryUsage":  58.17,
+        "NumVM":  12,
+        "AlertType":  "HIGH CPU"
+    }
+]

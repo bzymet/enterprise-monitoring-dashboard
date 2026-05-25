@@ -1,0 +1,30 @@
+﻿[
+    {
+        "Name":  "Server685",
+        "Drive":  "F:\\",
+        "Capacity":  "110",
+        "FreeGB":  "5",
+        "FreePerc":  "4"
+    },
+    {
+        "Name":  "Server422",
+        "Drive":  "C:\\",
+        "Capacity":  "100",
+        "FreeGB":  "8",
+        "FreePerc":  "2"
+    },
+    {
+        "Name":  "Server485",
+        "Drive":  "F:\\",
+        "Capacity":  "110",
+        "FreeGB":  "6",
+        "FreePerc":  "5"
+    },
+    {
+        "Name":  "Server22",
+        "Drive":  "C:\\",
+        "Capacity":  "100",
+        "FreeGB":  "3",
+        "FreePerc":  "1"
+    }
+]

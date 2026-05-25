@@ -1,0 +1,260 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta http-equiv="refresh" content="60">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VM Low Disk Space Dashboard</title>
+
+<style>
+
+html {
+    zoom: 60%;
+}
+
+body {
+    margin: 0;
+    padding: 6px;
+    background-color: #050b18;
+    color: white;
+    font-family: 'Segoe UI';
+}
+
+.dashboard-container {
+    background: linear-gradient(145deg,#0a1224,#09101f);
+    border: 1px solid #1d2b45;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,.4);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.live-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #00ff99;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.live-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #00ff99;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ff99;
+}
+
+.kpi-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.kpi-card {
+    flex: 1;
+    background: #0f1729;
+    border: 1px solid #223657;
+    border-radius: 8px;
+    padding: 8px;
+
+}
+
+.kpi-title {
+    color: #8ea5cf;
+    font-size: 14px;
+}
+
+.kpi-value {
+    margin-top: 4px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #123c7a;
+    color: white;
+    padding: 10px;
+    text-align: left;
+
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #1d2b45;
+
+}
+
+tr:hover {
+    background: rgba(255,255,255,.03);
+}
+
+.critical {
+    color: #ff4d4d;
+    font-weight: bold;
+}
+
+.warning {
+    color: #ffaa00;
+    font-weight: bold;
+}
+
+.footer {
+    margin-top: 10px;
+    color: #7d8fb3;
+    font-size: 11px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <div class="header">
+
+        <div class="title">
+            VM LOW DISK SPACE ALERTS
+        </div>
+
+        <div class="live-indicator">
+            <div class="live-dot"></div>
+            <span>LIVE</span>
+        </div>
+
+    </div>
+
+    <div class="kpi-row">
+
+        <div class="kpi-card">
+
+            <div class="kpi-title">
+                Total VMs
+            </div>
+
+            <div class="kpi-value">
+                700
+            </div>
+
+        </div>
+
+
+
+        <div class="kpi-card">
+
+            <div class="kpi-title">
+                Low Disk Alerts
+            </div>
+
+            <div class="kpi-value critical">
+                4
+            </div>
+
+        </div>
+
+        <div class="kpi-card">
+
+            <div class="kpi-title">
+                Lowest Free %
+            </div>
+
+            <div class="kpi-value warning">
+                1%
+            </div>
+
+        </div>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>Server</th>
+                <th>Drive</th>
+                <th>Capacity</th>
+                <th>Free GB</th>
+                <th>Free %</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+    <td>Server685</td>
+    <td>F:\</td>
+    <td>110 GB</td>
+    <td>5 GB</td>
+    <td class='critical'>
+        4%
+    </td>
+</tr> <tr>
+    <td>Server422</td>
+    <td>C:\</td>
+    <td>100 GB</td>
+    <td>8 GB</td>
+    <td class='critical'>
+        2%
+    </td>
+</tr> <tr>
+    <td>Server485</td>
+    <td>F:\</td>
+    <td>110 GB</td>
+    <td>6 GB</td>
+    <td class='critical'>
+        5%
+    </td>
+</tr> <tr>
+    <td>Server22</td>
+    <td>C:\</td>
+    <td>100 GB</td>
+    <td>3 GB</td>
+    <td class='critical'>
+        1%
+    </td>
+</tr>
+
+        </tbody>
+
+    </table>
+
+    <div class="footer">
+
+        Auto-refresh every 60 seconds |
+        Generated: 05/24/2026 14:51:02
+
+    </div>
+
+</div>
+
+</body>
+</html>
+

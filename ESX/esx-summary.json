@@ -1,0 +1,9 @@
+﻿{
+    "Status":  "HEALTHY",
+    "LowVmHosts":  1,
+    "HighCpuHosts":  2,
+    "LastUpdated":  "2026-05-24 15:07:46",
+    "AlertCount":  3,
+    "TotalHosts":  65,
+    "HighestCpu":  99.19
+}

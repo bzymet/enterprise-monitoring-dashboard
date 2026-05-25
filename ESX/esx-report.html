@@ -1,0 +1,235 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta http-equiv="refresh" content="60">
+
+<title>ESX Infrastructure Dashboard</title>
+
+<style>
+html {
+    zoom: 60%;
+}
+
+
+body {
+    background-color: #050b18;
+    color: white;
+    font-family: 'Segoe UI';
+    margin: 0;
+    padding: 6px;
+}
+
+.dashboard-container {
+    background: linear-gradient(145deg,#0a1224,#09101f);
+    border: 1px solid #1d2b45;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 0 30px rgba(0,0,0,.5);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.live-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #00ff99;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.live-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #00ff99;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ff99;
+}
+
+
+.kpi-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.kpi-card {
+    flex: 1;
+    background: #0f1729;
+    border: 1px solid #223657;
+    border-radius: 8px;
+    padding: 8px;
+
+}
+
+.kpi-highest {
+    flex: 1;
+    background: #0f1729;
+    border: 1px solid #223657;
+    border-radius: 8px;
+    padding: 8px;
+    color: RED;
+
+}
+
+.kpi-title {
+    color: #8ea5cf;
+    font-size: 14px;
+}
+
+.kpi-value {
+    margin-top: 4px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #123c7a;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+td {
+    padding: 14px;
+    border-bottom: 1px solid #1d2b45;
+}
+
+tr:hover {
+    background: rgba(255,255,255,.03);
+}
+
+.critical {
+    color: #ff4d4d;
+    font-weight: bold;
+}
+
+.warning {
+    color: #ffaa00;
+    font-weight: bold;
+}
+
+.footer {
+    margin-top: 20px;
+    color: #7d8fb3;
+    font-size: 11px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <div class="header">
+
+        <div class="title">
+            ESX INFRASTRUCTURE STATUS
+        </div>
+
+        <div class="live-indicator">
+            <div class="live-dot"></div>
+            <span>LIVE</span>
+        </div>
+
+    </div>
+
+    <div class="kpi-row">
+
+        <div class="kpi-card">
+            <div class="kpi-title">Total ESX Hosts</div>
+            <div class="kpi-value">65</div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-title">High CPU Hosts</div>
+            <div class="kpi-value">2</div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-title">Low VM Density</div>
+            <div class="kpi-value">1</div>
+        </div>
+
+        <div class="kpi-highest">
+            <div class="kpi-title">Highest CPU</div>
+            <div class="kpi-value">99.19%</div>
+        </div>
+
+    </div>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Cluster</th>
+                <th>Host</th>
+                <th>CPU Usage</th>
+                <th>Memory Usage</th>
+                <th>VM Count</th>
+                <th>Alert Type</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <tr>
+    <td>Cluster02</td>
+    <td>ESXHost23</td>
+    <td>99.19%</td>
+    <td>48.47%</td>
+    <td>10</td>
+    <td class='critical'>HIGH CPU</td>
+</tr> <tr>
+    <td>Cluster03</td>
+    <td>ESXHost32</td>
+    <td>17.59%</td>
+    <td>18.77%</td>
+    <td>2</td>
+    <td class='elevated'>LOW VM COUNT</td>
+</tr> <tr>
+    <td>Cluster04</td>
+    <td>ESXHost44</td>
+    <td>95.91%</td>
+    <td>58.17%</td>
+    <td>12</td>
+    <td class='critical'>HIGH CPU</td>
+</tr>
+
+        </tbody>
+
+    </table>
+
+    <div class="footer">
+        Auto-refresh every 60 seconds |
+        Generated: 05/24/2026 15:07:46
+    </div>
+
+</div>
+
+</body>
+</html>
+

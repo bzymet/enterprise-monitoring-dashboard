@@ -1,0 +1,20 @@
+﻿[
+    {
+        "URL":  "HRservicing.internal.com",
+        "StatusCode":  "200",
+        "TimeTakenMS":  "588",
+        "DateTime":  "02-10-11-00-2026"
+    },
+    {
+        "URL":  "creditservicing.internal.com",
+        "StatusCode":  "200",
+        "TimeTakenMS":  "535",
+        "DateTime":  "02-10-11-00-2026"
+    },
+    {
+        "URL":  "mailservicing.internal.com",
+        "StatusCode":  "200",
+        "TimeTakenMS":  "422",
+        "DateTime":  "02-10-11-00-2026"
+    }
+]

@@ -1,0 +1,14 @@
+﻿[
+    {
+        "MachineName":  "Server542",
+        "TimeCreated":  "1/26/2026 7:31:12 PM",
+        "Id":  "2004",
+        "Message":  "Windows successfully diagnosed a low virtual memory condition. The following programs consumed the most virtual memory: chrome.exe (23048) consumed 998391808 bystes. powerpoint.exe (53204) consumed 413392896 bytes"
+    },
+    {
+        "MachineName":  "Server199",
+        "TimeCreated":  "1/26/2026 7:32:12 PM",
+        "Id":  "2004",
+        "Message":  "Windows successfully diagnosed a low virtual memory condition. The following programs consumed the most virtual memory: iexplore.exe (24448) consumed 798391808 bystes. msedge.exe (53204) consumed 513492896 bytes"
+    }
+]

@@ -1,0 +1,23 @@
+﻿[
+    {
+        "MachineName":  "Server44",
+        "SummaryState":  "Unregistered",
+        "RegistrationState":  "Unregistered",
+        "LastDeregistrationTime":  "3/1/2026 7:28:26 AM",
+        "LastDeregistrationReason":  "SessionPrepareFailure"
+    },
+    {
+        "MachineName":  "Server633",
+        "SummaryState":  "Unregistered",
+        "RegistrationState":  "Unregistered",
+        "LastDeregistrationTime":  "3/1/2026 8:29:16 AM",
+        "LastDeregistrationReason":  "AgentError"
+    },
+    {
+        "MachineName":  "Server236",
+        "SummaryState":  "Unregistered",
+        "RegistrationState":  "Unregistered",
+        "LastDeregistrationTime":  "3/1/2026 8:43:16 AM",
+        "LastDeregistrationReason":  "SessionPrepareFailure"
+    }
+]
