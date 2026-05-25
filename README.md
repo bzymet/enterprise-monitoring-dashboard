@@ -144,6 +144,12 @@ Automated infrastructure latency analytics reporting built using PowerShell-base
 
 ![Latency Analytics](UserLatencyReports.png)
 
+This latency analysis report provides a consolidated snapshot comparison of average and median session latency across enterprise users and external vendor partner locations within the Citrix environment. The visualization highlights performance distribution across all connected sites, enabling rapid identification of high-latency locations, degraded user experience, and potential infrastructure bottlenecks.
+
+The report was designed to support operational monitoring, vendor oversight, and proactive troubleshooting by presenting latency trends in a single ranked view. Color-coded thresholds allow support teams to quickly distinguish between healthy, warning, and critical performance levels, while the side-by-side comparison of median and average latency helps identify instability, outlier behavior, and inconsistent network performance.
+
+This reporting capability was developed to improve visibility across geographically distributed support operations and provide leadership teams with actionable insight into real-time user experience conditions across enterprise and partner environments.
+
 ---
 
 
