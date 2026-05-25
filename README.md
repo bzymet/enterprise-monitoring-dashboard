@@ -23,7 +23,7 @@ Enterprise infrastructure monitoring platform integrating VMware ESX telemetry, 
 ![Dashboard](Dashboard.png)
 
 ## Features
-
+- Easily adaptable to add any monitoring metric needed (not just what is shown)
 - Real-time dashboard updates
 - Auto-refreshing operational telemetry
 - Infrastructure alerting and health monitoring
