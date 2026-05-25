@@ -146,7 +146,7 @@ Automated infrastructure latency analytics reporting built using PowerShell-base
 
 This latency analysis report provides a consolidated snapshot comparison of average and median session latency across enterprise users and external vendor partner locations within the Citrix environment. The visualization highlights performance distribution across all connected sites, enabling rapid identification of high-latency locations, degraded user experience, and potential infrastructure bottlenecks.
 
-The report was designed to support operational monitoring, vendor oversight, and proactive troubleshooting by presenting latency trends in a single ranked view. Color-coded thresholds allow support teams to quickly distinguish between healthy, warning, and critical performance levels, while the side-by-side comparison of median and average latency helps identify instability, outlier behavior, and inconsistent network performance.
+The report was designed for production support SRE teams, operational monitoring, vendor oversight, and proactive troubleshooting by presenting latency trends in a single ranked view. Color-coded thresholds allow support teams to quickly distinguish between healthy, warning, and critical performance levels, while the side-by-side comparison of median and average latency helps identify instability, outlier behavior, and inconsistent network performance.
 
 This reporting capability was developed to improve visibility across geographically distributed support operations and provide leadership teams with actionable insight into real-time user experience conditions across enterprise and partner environments.
 
@@ -156,5 +156,12 @@ This reporting capability was developed to improve visibility across geographica
 ## Operational Telemetry & Vendor Utilization Reporting
 
 ![Support Toolkit](VendorBreakout.png)
+
+This vendor footprint analysis provides a visual representation of global user distribution across enterprise locations, operational sites, and external vendor partner organizations within the environment. The report aggregates user counts by location and partner affiliation to deliver a high-level view of infrastructure utilization, workforce concentration, and third-party operational presence across the platform.
+
+The visualization was designed to support operational planning, capacity management, vendor oversight, and infrastructure scaling by identifying where users are concentrated throughout the enterprise ecosystem. By consolidating global user footprint data into a single graphical view, support and leadership teams can quickly assess regional distribution trends, partner dependency, and overall environment composition.
+
+This reporting capability was developed to improve visibility into large-scale distributed operations and provide actionable insight into enterprise-wide user allocation across internal and external support networks.
+
 
 ---
