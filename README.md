@@ -41,6 +41,52 @@ Enterprise infrastructure monitoring platform integrating VMware ESX telemetry, 
 
 https://bzymet.github.io/enterprise-monitoring-dashboard/
 
+This repository contains sanitized demonstration data only and does not include production infrastructure information.
+
+---
+
+## Server HealthDashboard Preview
+
+![Server Dashboard](ServerHealth.png)
+
+
+A lightweight enterprise infrastructure monitoring platform built with PowerShell, HTML, CSS, and JavaScript that generates real-time operational dashboards for Windows server environments.
+
+This project demonstrates automated infrastructure observability workflows including live telemetry collection, threshold-based alerting, KPI aggregation, and dynamic HTML dashboard generation without requiring external monitoring platforms or databases.
+
+Features:
+
+* Real-time server health dashboard
+* CPU, memory, and storage monitoring
+* Auto-refreshing HTML reporting
+* JSON summary aggregation
+* Threshold-based visual alerting
+* Enterprise-style operational reporting
+* Lightweight static web deployment
+* GitHub Pages compatible
+* Responsive dashboard interface
+
+Monitoring Categories:
+
+* CPU utilization
+* Memory utilization
+* Disk space monitoring
+* System uptime
+* Session tracking
+* Process monitoring
+* Infrastructure health scoring
+
+Technology Stack:
+
+* PowerShell
+* HTML5
+* CSS3
+* JavaScript
+* JSON
+* CSV data pipelines
+
+This repository contains sanitized demonstration data only and does not include production infrastructure information.
+
 
 ---
 
