@@ -50,6 +50,14 @@ https://bzymet.github.io/enterprise-monitoring-dashboard/
 
 ---
 
+## Endpoint Experience Analytics & Operational Telemetry
+
+Custom-developed endpoint telemetry reporting platform used to identify network instability, latency conditions, workstation health degradation, VPN issues, wireless signal problems, BIOS lifecycle concerns, and operational performance anomalies across enterprise endpoint environments.
+
+![Endpoint Telemetry](DTReports.png)
+
+---
+
 ## Enterprise Latency Analytics Reporting
 
 ![Latency Analytics](UserLatencyReports.png)
