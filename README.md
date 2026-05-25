@@ -132,9 +132,14 @@ All screenshots and demonstration data included in this repository have been san
 
 ## Endpoint Experience Analytics & Operational Telemetry
 
-Custom-developed endpoint telemetry and operational analytics reporting platform designed to identify user experience degradation, network instability, hardware health concerns, latency conditions, power configuration issues, and infrastructure performance anomalies across enterprise workstation environments. Reports are fully automated, and delivered via email, or accessible via custom Web Interface built on IIS/.Net
+This enterprise endpoint analytics and user experience platform was developed using PowerShell, HTML, CSS, and .NET Core MVC to provide realtime operational visibility into endpoint health, Citrix performance, network quality, and end-user computing conditions across distributed enterprise environments. The solution combines automated telemetry collection, web-based reporting delivered through IIS-hosted MVC applications, and scheduled email reporting to provide support and SRE teams with actionable insight into workstation stability, connectivity, battery health, VPN utilization, latency, packet loss, and overall user experience conditions.
 
 ![Endpoint Telemetry](DTReports.png)
+
+The platform was designed to proactively identify degraded user conditions before escalation by correlating infrastructure telemetry, endpoint metrics, and operational scoring into a centralized analytics interface. Dynamic visual indicators and health scoring models help operational teams rapidly identify devices with performance degradation, poor network conditions, outdated BIOS versions, extended uptime, weak wireless connectivity, VPN instability, or abnormal infrastructure behavior.
+
+Reporting capabilities include automated HTML email delivery, centralized web dashboards, historical operational views, and realtime support visibility through IIS-hosted .NET Core MVC frontends integrated with backend PowerShell data collection and telemetry aggregation pipelines.
+
 
 ---
 
