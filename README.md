@@ -37,13 +37,12 @@ Enterprise infrastructure monitoring platform integrating VMware ESX telemetry, 
 - Responsive dashboard UI
 - Enterprise operational reporting visualizations
 
----
-
 ## Live Dashboard
 
 https://bzymet.github.io/enterprise-monitoring-dashboard/
 
 
+---
 
 ## Latency Analytics Reporting
 
