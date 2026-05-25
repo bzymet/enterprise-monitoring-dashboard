@@ -149,11 +149,12 @@ Automated infrastructure latency analytics reporting built using PowerShell-base
 
 ![Latency Analytics](UserLatencyReports.png)
 
-This latency analysis report provides a consolidated snapshot comparison of average and median session latency across enterprise users and external vendor partner locations within the Citrix environment. The visualization highlights performance distribution across all connected sites, enabling rapid identification of high-latency locations, degraded user experience, and potential infrastructure bottlenecks.
+This enterprise Citrix latency analytics platform was developed using PowerShell, Citrix SDK integration, Active Directory lookups, HTML, and CSS to provide realtime visibility into user session latency across globally distributed enterprise and vendor partner environments. The reporting engine aggregates live Citrix session telemetry and enriches it with Active Directory metadata including user location, building assignment, organizational details, and partner affiliation to produce a consolidated operational view of user experience conditions across the environment.
 
-The report was designed for production support SRE teams, operational monitoring, vendor oversight, and proactive troubleshooting by presenting latency trends in a single ranked view. Color-coded thresholds allow support teams to quickly distinguish between healthy, warning, and critical performance levels, while the side-by-side comparison of median and average latency helps identify instability, outlier behavior, and inconsistent network performance.
+The platform was designed to support SRE, infrastructure engineering, and operations teams by enabling rapid identification of degraded sites, high-latency user populations, and regional performance bottlenecks affecting enterprise productivity. Automated data collection pipelines retrieve session metrics directly from Citrix infrastructure components while correlating user identity and geographic information through Active Directory integration to provide enhanced operational context and site-level visibility.
 
-This reporting capability was developed to improve visibility across geographically distributed support operations and provide leadership teams with actionable insight into real-time user experience conditions across enterprise and partner environments.
+The resulting analytics are rendered into automated HTML reports and fully sortable excel workbooks, and operational dashboards that visually rank latency conditions across all enterprise locations and vendor partner sites using threshold-based health categorization. By combining median and average latency comparisons with enriched user and site metadata, the platform helps operational teams quickly identify instability, network degradation, infrastructure saturation, and location-specific performance anomalies across large-scale distributed Citrix environments.
+
 
 ---
 
