@@ -132,7 +132,7 @@ All screenshots and demonstration data included in this repository have been san
 
 ## Endpoint Experience Analytics & Operational Telemetry
 
-This enterprise endpoint analytics and user experience platform was developed using PowerShell, HTML, CSS, and .NET Core MVC to provide realtime operational visibility into endpoint health, Citrix performance, network quality, and end-user computing conditions across distributed enterprise environments. The solution combines automated telemetry collection, web-based reporting delivered through IIS-hosted MVC applications, and scheduled email reporting to provide support and SRE teams with actionable insight into workstation stability, connectivity, battery health, VPN utilization, latency, packet loss, and overall user experience conditions.
+This enterprise endpoint analytics and user experience platform was developed using PowerShell, HTML, CSS, and .NET Core MVC to provide realtime operational visibility into endpoint health, Citrix performance, network quality, and end-user computing conditions across distributed enterprise environments. The solution combines automated telemetry collection, web-based reporting delivered through IIS-hosted MVC applications, and scheduled email reporting to provide support and SRE teams with actionable insight into 29+ key performance data points, and overall user experience conditions.
 
 ![Endpoint Telemetry](DTReports.png)
 
