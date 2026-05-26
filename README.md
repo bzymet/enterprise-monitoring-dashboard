@@ -162,6 +162,16 @@ Reporting capabilities include automated HTML email delivery, centralized web da
 
 
 ---
+## WEB based Endpoint Experience Analytics & Operational Telemetry
+
+Web-based operational analytics and endpoint telemetry platform developed using ASP.NET Core MVC, PowerShell automation, HTML/CSS, and IIS. Designed to provide historical infrastructure reporting, real-time operational visibility, threshold-based alerting, telemetry analytics, Excel export capabilities, and centralized reporting workflows for enterprise infrastructure and SRE operations teams.
+
+![Endpoint Telemetry](DTReportsWEBView.png)
+
+The platform also includes searchable historical telemetry reporting capabilities, enabling infrastructure and operations teams to perform trend analysis, historical incident investigation, user session analytics, and operational baseline comparisons across enterprise endpoint environments. Historical reporting workflows allow engineers to rapidly identify recurring infrastructure issues, analyze long-term performance degradation, and correlate operational anomalies across large-scale distributed environments.
+
+
+---
 
 ## Enterprise Latency Analytics Reporting
 
