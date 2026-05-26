@@ -130,6 +130,26 @@ All screenshots and demonstration data included in this repository have been san
 
 ---
 
+## Enterprise Infrastructure Operations & Telemetry Platform
+
+A custom-built enterprise support operations platform developed in C# with integrated PowerShell automation to streamline infrastructure support workflows, operational visibility, and administrative task automation across Windows environments.
+
+![Support Toolkit](ServerTool1.png)
+
+# Enterprise Infrastructure Operations & Telemetry Platform
+
+This enterprise infrastructure operations platform was developed using C#, PowerShell, Citrix SDK integrations, Active Directory enrichment, and Windows infrastructure telemetry pipelines to centralize operational administration, event correlation, realtime infrastructure analytics, and remediation workflows across large-scale Citrix and Windows server environments.
+
+The platform consolidates numerous infrastructure engineering and operational support functions into a unified interface designed to streamline incident response, operational diagnostics, telemetry analysis, server administration, and infrastructure observability initiatives. Integrated automation workflows allow infrastructure and SRE teams to rapidly execute operational tasks, collect infrastructure telemetry, analyze server health metrics, search distributed Windows event logs across hundreds of systems in seconds, and perform centralized remediation activities from a single operational platform.
+
+Core capabilities include realtime infrastructure telemetry analysis, distributed event log aggregation and search, Citrix server administration, process and session analytics, infrastructure health reporting, operational remediation tooling, server performance diagnostics, and centralized operational workflow automation.
+
+The platform was designed to improve operational efficiency, reduce incident response time, enhance centralized infrastructure visibility, and provide scalable operational tooling capable of supporting enterprise infrastructure engineering and observability initiatives.
+
+
+
+---
+
 ## Endpoint Experience Analytics & Operational Telemetry
 
 This enterprise endpoint analytics and user experience platform was developed using PowerShell, HTML, CSS, and .NET Core MVC to provide realtime operational visibility into endpoint health, Citrix performance, network quality, and end-user computing conditions across distributed enterprise environments. The solution combines automated telemetry collection, web-based reporting delivered through IIS-hosted MVC applications, and scheduled email reporting to provide support and SRE teams with actionable insight into 29+ key performance data points, and overall user experience conditions.
