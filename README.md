@@ -87,15 +87,15 @@ resource consumption, and operational health.
 
 ## Key Features
 
-• TempDB free space monitoring
-• Version store analytics
-• User/Internal object tracking
-• Active session visibility
-• CPU and elapsed time monitoring
-• KPI dashboard generation
-• JSON telemetry aggregation
-• HTML operational reporting
-• Threshold-based alerting support
+* TempDB free space monitoring
+* Version store analytics
+* User/Internal object tracking
+* Active session visibility
+* CPU and elapsed time monitoring
+* KPI dashboard generation
+* JSON telemetry aggregation
+* HTML operational reporting
+* Threshold-based alerting support
 
 ## Technical Highlights
 
