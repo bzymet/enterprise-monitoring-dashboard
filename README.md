@@ -77,6 +77,29 @@ This repository contains sanitized demonstration data only and does not include 
 
 ---
 
+## Enterprise SQL TempDB Monitoring & Operational Analytics
+
+PowerShell-based monitoring and analytics solution designed to provide
+real-time visibility into SQL Server TempDB utilization, session activity,
+resource consumption, and operational health.
+
+![SQL TempDB](SQLTempDB.png)
+
+## Key Features
+
+• TempDB free space monitoring
+• Version store analytics
+• User/Internal object tracking
+• Active session visibility
+• CPU and elapsed time monitoring
+• KPI dashboard generation
+• JSON telemetry aggregation
+• HTML operational reporting
+• Threshold-based alerting support
+
+
+---
+
 ## Infrastructure Support Automation Toolkit
 
 A custom-built enterprise support operations platform developed in C# with integrated PowerShell automation to streamline infrastructure support workflows, operational visibility, and administrative task automation across Windows environments.
