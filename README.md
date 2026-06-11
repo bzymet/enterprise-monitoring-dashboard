@@ -97,6 +97,20 @@ resource consumption, and operational health.
 • HTML operational reporting
 • Threshold-based alerting support
 
+## Technical Highlights
+
+* PowerShell Automation
+* SQL Server Monitoring
+* T-SQL Analytics
+* Operational Telemetry
+* Infrastructure Observability
+* Performance Analytics
+* Data Aggregation Pipelines
+* HTML/CSS Dashboard Development
+* JSON-Based KPI Reporting
+* Operational Reporting & Visualization
+* Threshold-Based Alerting
+* SRE Monitoring Concepts
 
 ---
 
