@@ -2,6 +2,8 @@
 
 Enterprise infrastructure monitoring platform integrating VMware ESX telemetry, Citrix monitoring, network latency analytics, server health reporting, and operational automation pipelines through centralized HTML dashboards and JSON aggregation.
 
+The platforms below were designed not only to provide observability, but also to drive operational action. Telemetry events could trigger automated alerting, ServiceNow incident creation, workflow automation, remediation activities, and team-specific routing through REST API integrations, enabling a more proactive and scalable operational support model
+
 ---
 
 ## Technologies Used
