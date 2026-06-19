@@ -27,7 +27,7 @@ Real-time operational dashboard built with ASP.NET Core MVC and the AWS SDK for 
 - Infrastructure risk reporting
 - Operational dashboards for engineering leadership
 
-![AWS Dashboard](AWSDashboard.png)
+![AWS Dashboard](AWSDashboard1.png)
 
 ### Technology Stack
 
