@@ -1,3 +1,48 @@
+# Infrastructure Engineering Portfolio
+
+This repository contains a collection of infrastructure engineering, observability, automation, and operational analytics solutions developed across enterprise environments. The projects focus on telemetry, monitoring, automation, operational reporting, platform engineering, and infrastructure governance across cloud and on-premises platforms.
+
+
+
+# AWS Infrastructure Command Center
+
+Real-time operational dashboard built with ASP.NET Core MVC and the AWS SDK for .NET, designed to provide a single-pane view of AWS infrastructure health, risk, compliance, telemetry, and governance.
+
+### Current Live Integrations
+
+✅ EC2  
+✅ CloudWatch  
+✅ Systems Manager  
+✅ Lambda  
+✅ S3  
+
+### Key Capabilities
+
+- Real-time EC2 telemetry and CPU analytics
+- CloudWatch alarm monitoring
+- Systems Manager fleet visibility
+- S3 governance and compliance insights
+- Lambda operational metrics
+- Executive health scoring
+- Infrastructure risk reporting
+- Operational dashboards for engineering leadership
+
+![AWS Dashboard](AWSDashboard.png)
+
+### Technology Stack
+
+- ASP.NET Core MVC (.NET 10)
+- AWS SDK for .NET
+- CloudWatch
+- EC2
+- Systems Manager
+- Lambda
+- S3
+- Chart.js
+- HTML / CSS / JavaScript
+
+
+
 # Unified Infrastructure Monitoring Dashboard
 
 Enterprise infrastructure monitoring platform integrating VMware ESX telemetry, Citrix monitoring, network latency analytics, server health reporting, and operational automation pipelines through centralized HTML dashboards and JSON aggregation.
