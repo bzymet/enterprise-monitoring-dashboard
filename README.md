@@ -34,7 +34,7 @@ by instance, automatically covering any new instances as they're added.
 
 On breach, the alarm triggers Lambda function that identifies the specific 
 instance, checks its operating system, and sends the appropriate remediation 
-command through Systems Manager — PowerShell for Windows, shell for Linux.
+command through Systems Manager, PowerShell for Windows, shell for Linux.
 
 **Stack:** CloudWatch Alarms, Metrics Insights, Lambda (Python/boto3), 
 Systems Manager Run Command, IAM
