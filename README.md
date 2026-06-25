@@ -110,7 +110,7 @@ Active Directory Domain Controller Health Dashboard
 
 A PowerShell-based Active Directory operations dashboard that remotely collects health and authentication metrics from multiple Domain Controllers and presents them in a centralized HTML dashboard. The solution automates the collection of Active Directory, Kerberos, NTLM, replication, DNS, LDAP, Windows service, and system health data, exporting the results to CSV for historical reporting while providing a real-time operational view of the environment.
 
-![Server Dashboard](ADHealth.png)
+![Domain Controller](ADHealth.png)
 
 Key Features
 
