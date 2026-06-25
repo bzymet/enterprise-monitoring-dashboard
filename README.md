@@ -128,7 +128,8 @@ Technologies:
 * PowerShell
 * Active Directory Module (RSAT)
 * CIM / WMI
-* HTML / CSS
+* HTML
+* CSS
 
 Monitored Services:
 * Active Directory Domain Services
