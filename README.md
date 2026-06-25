@@ -104,6 +104,43 @@ This repository contains sanitized demonstration data only and does not include 
 
 ---
 
+## Domain Controller Health Dashboard
+
+Active Directory Domain Controller Health Dashboard
+
+A PowerShell-based Active Directory operations dashboard that remotely collects health and authentication metrics from multiple Domain Controllers and presents them in a centralized HTML dashboard. The solution automates the collection of Active Directory, Kerberos, NTLM, replication, DNS, LDAP, Windows service, and system health data, exporting the results to CSV for historical reporting while providing a real-time operational view of the environment.
+
+![Server Dashboard](ADHealth.png)
+
+Key Features
+
+Remote Domain Controller health monitoring
+Active Directory authentication metrics (Kerberos / NTLM)
+Failed logon and account lockout monitoring
+Active Directory replication health
+DNS and LDAP response monitoring
+Critical AD service validation
+CPU, memory, and disk utilization
+Automated health assessment and likely issue identification
+CSV reporting and auto-refreshing HTML dashboard
+
+Technologies: 
+* PowerShell
+* Active Directory Module (RSAT)
+* CIM / WMI
+* HTML / CSS
+
+Monitored Services:
+* Active Directory Domain Services
+* Kerberos
+* NTLM
+* LDAP Connectivity
+* DNS
+* Active Directory Replication
+* Domain Controller services
+* System Health
+
+---
 ## Server HealthDashboard Preview
 
 ![Server Dashboard](ServerHealth.png)
