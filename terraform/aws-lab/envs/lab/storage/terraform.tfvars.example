@@ -1,0 +1,8 @@
+bucket_name = "your-unique-s3-bucket-name"
+
+common_tags = {
+  Environment = "Lab"
+  ManagedBy   = "Terraform"
+  CreatedBy   = "Terraform"
+  Owner       = "YourName"
+}

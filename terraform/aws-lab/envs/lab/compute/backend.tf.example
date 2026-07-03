@@ -1,0 +1,10 @@
+terraform {
+  backend "s3" {
+    bucket       = "your-terraform-state-bucket-name"
+    key          = "lab/compute/terraform.tfstate"
+    region       = "us-east-2"
+    profile      = "terraform-lab"
+    encrypt      = true
+    use_lockfile = true
+  }
+}

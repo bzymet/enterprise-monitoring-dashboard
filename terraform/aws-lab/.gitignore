@@ -1,0 +1,42 @@
+# Terraform local directories
+.terraform/
+**/.terraform/
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+terraform.tfstate
+terraform.tfstate.backup
+
+# Real variable files
+*.tfvars
+!*.tfvars.example
+
+# Terraform plans
+*.tfplan
+plan.out
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Secrets / keys
+*.pem
+*.key
+*.ppk
+*.rdp
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Real backend config
+backend.tf
+!backend.tf.example

@@ -1,0 +1,36 @@
+subnet_id                  = "subnet-xxxxxxxxxxxxxxxxx"
+linux_security_group_ids   = ["sg-xxxxxxxxxxxxxxxxx"]
+windows_security_group_ids = ["sg-yyyyyyyyyyyyyyyyy"]
+
+key_name             = "your-key-name"
+iam_instance_profile = "your-instance-profile"
+
+linux_ami_id          = "ami-xxxxxxxxxxxxxxxxx"
+linux_instance_type   = "t3.micro"
+linux_name_prefix     = "LAB-APP-LNX-"
+linux_start_number    = 2
+linux_server_count    = 1
+
+windows_ami_id        = "ami-yyyyyyyyyyyyyyyyy"
+windows_instance_type = "t3.micro"
+windows_name_prefix   = "LAB-APP-WIN-"
+windows_start_number  = 3
+windows_server_count  = 1
+
+common_tags = {
+  Environment = "Lab"
+  ManagedBy   = "Terraform"
+  CreatedBy   = "Terraform"
+  Owner       = "YourName"
+}
+
+ec2_fleet_high_cpu_alarm_name        = "TF-EC2-Fleet-HighCPU"
+ec2_fleet_high_cpu_alarm_description = "Terraform-managed EC2 fleet high CPU alarm using CloudWatch Metrics Insights."
+ec2_fleet_high_cpu_threshold         = 90
+
+ec2_fleet_high_cpu_alarm_actions = [
+  "arn:aws:sns:region:account-id:topic-name",
+  "arn:aws:lambda:region:account-id:function:function-name"
+]
+
+ec2_fleet_high_cpu_metric_query_expression = "SELECT MAX(CPUUtilization) FROM SCHEMA(\"AWS/EC2\", InstanceId) GROUP BY InstanceId ORDER BY MAX() DESC"

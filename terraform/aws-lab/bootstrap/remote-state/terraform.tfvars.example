@@ -1,0 +1,9 @@
+state_bucket_name = "your-terraform-state-bucket-name"
+
+common_tags = {
+  Environment = "Lab"
+  ManagedBy   = "Terraform"
+  CreatedBy   = "Terraform"
+  Owner       = "YourName"
+  Purpose     = "TerraformRemoteState"
+}

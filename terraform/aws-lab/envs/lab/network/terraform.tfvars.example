@@ -1,0 +1,13 @@
+vpc_id = "vpc-xxxxxxxxxxxxxxxxx"
+
+linux_management_sg_name   = "Linux-Management-TF"
+windows_management_sg_name = "Windows-Management-TF"
+
+admin_cidr_ipv4 = "x.x.x.x/32"
+
+common_tags = {
+  Environment = "Lab"
+  ManagedBy   = "Terraform"
+  CreatedBy   = "Terraform"
+  Owner       = "YourName"
+}
