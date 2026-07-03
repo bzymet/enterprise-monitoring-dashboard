@@ -2,6 +2,14 @@
 
 This repository contains a collection of infrastructure engineering, observability, automation, and operational analytics solutions developed across enterprise environments. The projects focus on telemetry, monitoring, automation, operational reporting, platform engineering, and infrastructure governance across cloud and on-premises platforms.
 
+## Infrastructure as Code
+
+The AWS infrastructure behind this lab is managed with Terraform and documented separately here:
+
+[Terraform AWS Infrastructure Lab](terraform/aws-lab/README.md)
+
+
+This Terraform project includes reusable modules for EC2, security groups, and CloudWatch alarms, plus separate compute, network, and storage stacks using remote S3 backend state.
 
 
 # AWS Infrastructure Command Center
