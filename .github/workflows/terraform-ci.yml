@@ -1,0 +1,72 @@
+name: Terraform CI
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "terraform/aws-lab/**"
+      - ".github/workflows/terraform-ci.yml"
+
+  push:
+    branches:
+      - main
+    paths:
+      - "terraform/aws-lab/**"
+      - ".github/workflows/terraform-ci.yml"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  terraform-format:
+    name: Terraform Format Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Check Terraform formatting
+        run: terraform fmt -check -recursive terraform/aws-lab
+
+  terraform-validate:
+    name: Validate ${{ matrix.stack }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+
+      matrix:
+        include:
+          - stack: bootstrap-remote-state
+            working_directory: terraform/aws-lab/bootstrap/remote-state
+
+          - stack: lab-network
+            working_directory: terraform/aws-lab/envs/lab/network
+
+          - stack: lab-compute
+            working_directory: terraform/aws-lab/envs/lab/compute
+
+          - stack: lab-storage
+            working_directory: terraform/aws-lab/envs/lab/storage
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Initialize Terraform without remote backend
+        working-directory: ${{ matrix.working_directory }}
+        run: terraform init -backend=false -input=false
+
+      - name: Validate Terraform configuration
+        working-directory: ${{ matrix.working_directory }}
+        run: terraform validate
