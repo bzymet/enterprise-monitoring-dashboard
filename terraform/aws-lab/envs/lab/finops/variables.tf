@@ -4,8 +4,9 @@ variable "aws_region" {
 }
 
 variable "aws_profile" {
-  description = "Local AWS CLI profile used when running Terraform from a workstation."
+  description = "Optional local AWS CLI profile. Leave empty when using OIDC credentials in GitHub Actions."
   type        = string
+  default     = ""
 }
 
 variable "budget_name" {
