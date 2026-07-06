@@ -56,6 +56,9 @@ jobs:
           - stack: lab-storage
             working_directory: terraform/aws-lab/envs/lab/storage
 
+          - stack: lab-finops
+            working_directory: terraform/aws-lab/envs/lab/finops
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
