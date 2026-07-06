@@ -1,3 +1,5 @@
+# CI validation test - no infrastructure change
+
 module "ec2_fleet_high_cpu_alarm" {
   source = "../../../modules/cloudwatch-metric-alarm"
 
