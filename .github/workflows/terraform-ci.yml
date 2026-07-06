@@ -19,6 +19,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
   terraform-format:
@@ -56,6 +57,9 @@ jobs:
           - stack: lab-storage
             working_directory: terraform/aws-lab/envs/lab/storage
 
+          - stack: lab-finops
+            working_directory: terraform/aws-lab/envs/lab/finops
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -70,3 +74,59 @@ jobs:
       - name: Validate Terraform configuration
         working-directory: ${{ matrix.working_directory }}
         run: terraform validate
+
+  terraform-finops-plan:
+    name: Plan lab-finops
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+
+    env:
+      TF_IN_AUTOMATION: true
+      TF_VAR_aws_region: ${{ vars.AWS_REGION }}
+      TF_VAR_budget_name: ${{ vars.FINOPS_BUDGET_NAME }}
+      TF_VAR_budget_limit_amount: ${{ vars.FINOPS_BUDGET_LIMIT }}
+      TF_VAR_notification_email: ${{ secrets.FINOPS_NOTIFICATION_EMAIL }}
+
+    defaults:
+      run:
+        working-directory: terraform/aws-lab/envs/lab/finops
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Configure temporary AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_FINOPS_PLAN_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+          role-session-name: GitHubActions-FinOps-Plan
+
+      - name: Verify AWS identity
+        run: aws sts get-caller-identity
+
+      - name: Create CI backend configuration
+        shell: bash
+        run: |
+          cat > backend-ci.tf <<'EOF'
+          terraform {
+            backend "s3" {}
+          }
+          EOF
+
+      - name: Initialize FinOps remote backend
+        run: >
+          terraform init
+          -input=false
+          -reconfigure
+          -backend-config="bucket=${{ vars.TERRAFORM_STATE_BUCKET }}"
+          -backend-config="key=lab/finops/terraform.tfstate"
+          -backend-config="region=${{ vars.AWS_REGION }}"
+          -backend-config="encrypt=true"
+          -backend-config="use_lockfile=true"
+
+      - name: Generate FinOps Terraform plan
+        run: terraform plan -input=false -no-color

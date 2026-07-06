@@ -1,0 +1,5 @@
+aws_region          = "us-east-2"
+aws_profile         = "your-aws-profile"
+budget_name         = "My Zero-Spend Budget"
+budget_limit_amount = 1
+notification_email  = "your-email@example.com"
