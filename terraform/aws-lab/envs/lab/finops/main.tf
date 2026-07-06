@@ -7,7 +7,6 @@ resource "aws_budgets_budget" "zero_spend" {
   limit_unit   = "USD"
   time_unit    = "MONTHLY"
 
-
   notification {
     comparison_operator        = "GREATER_THAN"
     threshold                  = 0.01
@@ -15,4 +14,11 @@ resource "aws_budgets_budget" "zero_spend" {
     notification_type          = "ACTUAL"
     subscriber_email_addresses = [var.notification_email]
   }
+
+  lifecycle {
+    ignore_changes = [
+      billing_view_arn
+    ]
+  }
 }
+
