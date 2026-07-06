@@ -12,7 +12,7 @@ resource "aws_budgets_budget" "zero_spend" {
     threshold                  = 0.01
     threshold_type             = "ABSOLUTE_VALUE"
     notification_type          = "ACTUAL"
-    subscriber_email_addresses = [var.notification_email]
+    subscriber_email_addresses = [nonsensitive(var.notification_email)]
   }
 
   lifecycle {
