@@ -357,7 +357,7 @@ This allows the alarm to evaluate CPU utilization across the EC2 fleet rather th
 The alarm action path includes:
 
 - SNS notification
-- Lambda remediation (Will auto-detect windows/linux and will kill specific high usage processes tailored to sepcifc workflow or environment)
+- Lambda remediation (Python code will auto-detect windows/linux and will kill specific high usage processes tailored to sepcifc workflow or environment)
 
 This models an operational-control pattern where Terraform manages infrastructure provisioning, monitoring, and remediation hooks.
 
