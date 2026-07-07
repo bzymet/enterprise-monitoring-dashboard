@@ -9,7 +9,9 @@ The AWS infrastructure behind this lab is managed with Terraform and documented 
 [Terraform AWS Infrastructure Lab](terraform/aws-lab/README.md)
 
 
-This Terraform project includes reusable modules for EC2, security groups, and CloudWatch alarms, plus separate compute, network, and storage stacks using remote S3 backend state.
+This Terraform project includes reusable modules for EC2, security groups, and CloudWatch alarms, plus separate compute, network, storage, and FinOps stacks using remote S3 backend state.
+
+Infrastructure changes follow a Git-based CI/CD workflow with feature branches, pull requests, automated formatting and validation checks, and Terraform plan review before deployment. GitHub Actions uses OIDC to assume short-lived AWS IAM roles, with separate read-only plan and controlled apply permissions. Production-style approval gates ensure the reviewed Terraform plan is the exact plan applied.
 
 
 # AWS Infrastructure Command Center
