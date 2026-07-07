@@ -4,7 +4,7 @@ This repository contains a collection of infrastructure engineering, observabili
 
 ## Infrastructure as Code
 
-The AWS infrastructure behind this lab is managed with Terraform and documented separately here:
+The AWS infrastructure behind this AWS Operations Dashboard lab is managed with Terraform and documented separately here:
 
 [Terraform AWS Infrastructure Lab](terraform/aws-lab/README.md)
 
