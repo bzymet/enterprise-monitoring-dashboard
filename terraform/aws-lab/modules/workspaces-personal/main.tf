@@ -7,6 +7,9 @@ resource "aws_workspaces_workspace" "this" {
   user_volume_encryption_enabled = var.user_volume_encryption_enabled
 
   workspace_properties {
+    compute_type_name                         = "STANDARD"
+    root_volume_size_gib                      = 80
+    user_volume_size_gib                      = 50
     running_mode                              = var.running_mode
     running_mode_auto_stop_timeout_in_minutes = var.auto_stop_timeout_minutes
   }
