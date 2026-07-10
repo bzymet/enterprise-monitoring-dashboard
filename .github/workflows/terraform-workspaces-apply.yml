@@ -1,0 +1,139 @@
+name: Terraform WorkSpaces Apply
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  TF_IN_AUTOMATION: true
+
+  TF_VAR_aws_region: us-east-1
+  TF_VAR_directory_id: d-906677c769
+  TF_VAR_bundle_id: wsb-82dpmqfgh
+  TF_VAR_user_name: bzymet
+  TF_VAR_aws_profile: ""
+
+jobs:
+  terraform-workspaces-plan:
+    name: Generate lab-workspaces plan
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: terraform/aws-lab/envs/lab/workspaces
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v4
+
+      - name: Configure read-only AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6.2.1
+        with:
+          role-to-assume: ${{ vars.AWS_WORKSPACES_PLAN_ROLE_ARN }}
+          aws-region: us-east-1
+          role-session-name: GitHubActions-WorkSpaces-Plan
+          allowed-account-ids: "465556393364"
+
+      - name: Verify AWS identity
+        run: aws sts get-caller-identity
+
+      - name: Create CI backend configuration
+        shell: bash
+        run: |
+          cat > backend-ci.tf <<'EOF'
+          terraform {
+            backend "s3" {}
+          }
+          EOF
+
+      - name: Initialize WorkSpaces remote backend
+        run: >
+          terraform init
+          -input=false
+          -reconfigure
+          -backend-config="bucket=${{ vars.TERRAFORM_STATE_BUCKET }}"
+          -backend-config="key=lab/workspaces/terraform.tfstate"
+          -backend-config="region=us-east-2"
+          -backend-config="encrypt=true"
+          -backend-config="use_lockfile=true"
+
+      - name: Generate saved Terraform plan
+        run: terraform plan -input=false -no-color -out=workspaces.tfplan
+
+      - name: Create readable Terraform plan
+        run: terraform show -no-color workspaces.tfplan > workspaces-plan.txt
+
+      - name: Upload Terraform plan artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: workspaces-terraform-plan
+          path: |
+            terraform/aws-lab/envs/lab/workspaces/workspaces.tfplan
+            terraform/aws-lab/envs/lab/workspaces/workspaces-plan.txt
+          if-no-files-found: error
+          retention-days: 7
+
+  terraform-workspaces-apply:
+    name: Apply approved lab-workspaces plan
+    needs: terraform-workspaces-plan
+    runs-on: ubuntu-latest
+
+    environment:
+      name: workspaces-apply
+
+    defaults:
+      run:
+        working-directory: terraform/aws-lab/envs/lab/workspaces
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v4
+
+      - name: Configure apply AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6.2.1
+        with:
+          role-to-assume: ${{ vars.AWS_WORKSPACES_APPLY_ROLE_ARN }}
+          aws-region: us-east-1
+          role-session-name: GitHubActions-WorkSpaces-Apply
+          allowed-account-ids: "465556393364"
+
+      - name: Verify AWS identity
+        run: aws sts get-caller-identity
+
+      - name: Create CI backend configuration
+        shell: bash
+        run: |
+          cat > backend-ci.tf <<'EOF'
+          terraform {
+            backend "s3" {}
+          }
+          EOF
+
+      - name: Initialize WorkSpaces remote backend
+        run: >
+          terraform init
+          -input=false
+          -reconfigure
+          -backend-config="bucket=${{ vars.TERRAFORM_STATE_BUCKET }}"
+          -backend-config="key=lab/workspaces/terraform.tfstate"
+          -backend-config="region=us-east-2"
+          -backend-config="encrypt=true"
+          -backend-config="use_lockfile=true"
+
+      - name: Download approved Terraform plan
+        uses: actions/download-artifact@v4
+        with:
+          name: workspaces-terraform-plan
+          path: terraform/aws-lab/envs/lab/workspaces
+
+      - name: Apply approved Terraform plan
+        run: terraform apply -input=false -no-color -auto-approve workspaces.tfplan
