@@ -24,7 +24,7 @@ This is not intended to be a one-off Terraform script. It is structured as a sma
 
 ## What This Project Builds
 
-The Terraform code currently manages AWS infrastructure across compute, network, storage, monitoring, FinOps, and remote state.
+The Terraform code currently manages AWS infrastructure across compute, network, storage, monitoring, FinOps, WorkSpaces, and remote state.
 
 Current capabilities include:
 
@@ -34,9 +34,11 @@ Current capabilities include:
 - SNS and Lambda action integration for high CPU remediation
 - S3 storage resource management
 - AWS Budget management through a dedicated FinOps stack
+- Amazon WorkSpaces Personal deployment through a dedicated WorkSpaces stack
+- Reusable WorkSpaces module for AWS-provided Windows bundles
 - Import of an existing manually created AWS Budget into Terraform state
 - Remote Terraform state stored in S3
-- Separate state files for compute, network, storage, and FinOps stacks
+- Separate state files for compute, network, storage, FinOps, and WorkSpaces stacks
 - Reusable Terraform modules
 - Environment-specific variable examples
 - GitHub-safe example files for backend and tfvars configuration
@@ -57,7 +59,8 @@ AWS Terraform Lab
 │       ├── lab/compute/terraform.tfstate
 │       ├── lab/network/terraform.tfstate
 │       ├── lab/storage/terraform.tfstate
-│       └── lab/finops/terraform.tfstate
+│       ├── lab/finops/terraform.tfstate
+│       └── lab/workspaces/terraform.tfstate
 │
 ├── Network Stack
 │   ├── Linux-Management-TF security group
@@ -73,6 +76,9 @@ AWS Terraform Lab
 │
 ├── FinOps Stack
 │   └── Terraform-managed AWS Budget
+│
+├── WorkSpaces Stack
+│   └── Terraform-managed Amazon WorkSpaces Personal desktop
 │
 └── GitHub Actions CI/CD
     ├── Pull-request formatting and validation
@@ -92,7 +98,8 @@ enterprise-monitoring-dashboard
 ├── .github
 │   └── workflows
 │       ├── terraform-ci.yml
-│       └── terraform-finops-apply.yml
+│       ├── terraform-finops-apply.yml
+│       └── terraform-workspaces-apply.yml
 │
 └── terraform
     └── aws-lab
@@ -132,14 +139,20 @@ enterprise-monitoring-dashboard
         │       │   ├── terraform.tfvars.example
         │       │   └── outputs.tf
         │       │
-        │       └── finops
-        │           ├── backend.tf.example
-        │           ├── imports.tf
+        │       ├── finops
+        │       │   ├── backend.tf.example
+        │       │   ├── imports.tf
+        │       │   ├── main.tf
+        │       │   ├── outputs.tf
+        │       │   ├── providers.tf
+        │       │   ├── variables.tf
+        │       │   └── terraform.tfvars.example
+        │       │
+        │       └── workspaces
         │           ├── main.tf
         │           ├── outputs.tf
         │           ├── providers.tf
-        │           ├── variables.tf
-        │           └── terraform.tfvars.example
+        │           └── variables.tf
         │
         └── modules
             ├── ec2-instance
@@ -152,7 +165,12 @@ enterprise-monitoring-dashboard
             │   ├── variables.tf
             │   └── outputs.tf
             │
-            └── security-group
+            ├── security-group
+            │   ├── main.tf
+            │   ├── variables.tf
+            │   └── outputs.tf
+            │
+            └── workspaces-personal
                 ├── main.tf
                 ├── variables.tf
                 └── outputs.tf
@@ -175,6 +193,7 @@ terraform/aws-lab/modules/
 | `ec2-instance` | Creates standardized EC2 instances using AMI, instance type, subnet, security groups, IAM instance profile, naming, and tags |
 | `security-group` | Creates security groups with separate ingress and egress rule resources |
 | `cloudwatch-metric-alarm` | Creates CloudWatch metric alarms using metric-query expressions |
+| `workspaces-personal` | Creates an Amazon WorkSpaces Personal desktop using an existing registered directory, AWS bundle, user, AutoStop settings, and tags |
 
 The modules do not hardcode lab-specific values. Environment-specific details are passed in from the root stacks.
 
@@ -194,6 +213,7 @@ Each root stack has a separate purpose and separate Terraform state.
 | `network` | Security groups and management access rules | `lab/network/terraform.tfstate` |
 | `storage` | S3 test/application bucket | `lab/storage/terraform.tfstate` |
 | `finops` | AWS Budget and related FinOps controls | `lab/finops/terraform.tfstate` |
+| `workspaces` | Amazon WorkSpaces Personal desktop deployment | `lab/workspaces/terraform.tfstate` |
 
 This separation reduces blast radius because each stack can be planned and applied independently.
 
@@ -222,6 +242,8 @@ lab/compute/terraform.tfstate
 lab/network/terraform.tfstate
 lab/storage/terraform.tfstate
 lab/finops/terraform.tfstate
+lab/workspaces/terraform.tfstate
+lab/workspaces/terraform.tfstate
 ```
 
 Real `backend.tf` files are intentionally excluded from source control. The repository includes `backend.tf.example` files so the project structure can be shared without publishing account-specific backend settings.
@@ -335,6 +357,36 @@ The provider configuration supports both:
 
 ---
 
+## WorkSpaces Stack
+
+Path:
+
+```text
+terraform/aws-lab/envs/lab/workspaces
+```
+
+The WorkSpaces stack manages an Amazon WorkSpaces Personal desktop through a reusable Terraform module.
+
+Current deployment characteristics:
+
+```text
+Directory:    Existing Simple AD-backed WorkSpaces directory
+Bundle:       Standard with Windows (Server 2025 based)
+Compute:      STANDARD
+Root volume:  80 GiB
+User volume:  50 GiB
+Running mode: AUTO_STOP
+AutoStop:     60 minutes
+```
+
+The stack uses an existing AWS Directory Service directory, an existing registered WorkSpaces directory, an AWS-provided WorkSpaces bundle, and an existing directory user. Terraform manages the WorkSpace resource, tags, sizing, AutoStop configuration, and state outputs.
+
+The WorkSpaces deployment is intentionally separated from the existing Ohio-based infrastructure because Simple AD availability required the WorkSpaces resources to be deployed in `us-east-1`, while the Terraform state bucket remains in `us-east-2`.
+
+The WorkSpaces workflow also demonstrated operational state handling after an AWS-side provisioning timeout. The WorkSpace was validated in AWS, Terraform taint was removed after confirming the resource was healthy, and the remote state outputs were reconciled through the GitHub Actions deployment workflow.
+
+---
+
 ## CloudWatch Monitoring
 
 The compute stack creates the Terraform-managed alarm:
@@ -382,7 +434,7 @@ It performs:
 - Repository checkout
 - Terraform installation
 - `terraform fmt -check -recursive`
-- Matrix-based validation of bootstrap, network, compute, storage, and FinOps stacks
+- Matrix-based validation of bootstrap, network, compute, storage, FinOps, and WorkSpaces stacks
 - `terraform init -backend=false`
 - `terraform validate`
 - A real FinOps plan against the remote S3 backend
@@ -393,19 +445,20 @@ The FinOps PR plan allows reviewers to inspect intended AWS changes before code 
 
 ### Protected Plan and Apply Workflow
 
-Workflow:
+Workflows:
 
 ```text
 .github/workflows/terraform-finops-apply.yml
+.github/workflows/terraform-workspaces-apply.yml
 ```
 
-The deployment workflow is started manually from `main` and uses two separate jobs.
+The deployment workflows are started manually from `main` and use two separate jobs: a plan job and an apply job.
 
 #### Plan job
 
 The plan job:
 
-1. Assumes the read-only FinOps plan role through OIDC
+1. Assumes the appropriate read-only plan role through OIDC
 2. Initializes the remote S3 backend
 3. Generates a saved binary Terraform plan
 4. Creates a human-readable plan file
@@ -416,6 +469,8 @@ Artifacts:
 ```text
 finops.tfplan
 finops-plan.txt
+workspaces.tfplan
+workspaces-plan.txt
 ```
 
 #### Apply job
@@ -425,7 +480,7 @@ The apply job:
 1. Depends on successful completion of the plan job
 2. Waits at the protected `finops-apply` GitHub environment
 3. Requires a reviewer to inspect and approve the plan
-4. Assumes the separate FinOps apply role through OIDC
+4. Assumes the separate apply role through OIDC
 5. Downloads the exact saved binary plan
 6. Applies that exact reviewed plan
 
@@ -452,11 +507,11 @@ Manual deployment workflow
         ↓
 Saved plan generated and published
         ↓
-Reviewer inspects finops-plan.txt
+Reviewer inspects the generated plan text artifact
         ↓
 Protected environment approval
         ↓
-Exact finops.tfplan is applied
+Exact saved Terraform plan is applied
         ↓
 Remote Terraform state updated
 ```
@@ -479,32 +534,34 @@ AWS STS
 Temporary role credentials
 ```
 
-Two IAM roles enforce separation of duties:
+Plan and apply IAM roles enforce separation of duties:
 
 ```text
 GitHubActions-Terraform-FinOps-Plan
 GitHubActions-Terraform-FinOps-Apply
+GitHubActions-Terraform-Lab-Plan
+GitHubActions-Terraform-Lab-Apply
 ```
 
 ### Plan role
 
-The plan role is intended for lower-risk read and planning activity. It can read:
+The plan role is intended for lower-risk read and planning activity. Depending on the stack, it can read:
 
-- The FinOps Terraform state
-- The AWS Budget
-- Budget tags
+- Terraform remote state
+- AWS Budget configuration
+- WorkSpaces directory, bundle, tag, and WorkSpace metadata
 - AWS account identity
 
 ### Apply role
 
 The apply role can:
 
-- Read and update the FinOps Terraform state
+- Read and update the relevant Terraform state
 - Create and remove the S3 state-lock object
 - Manage AWS Budgets within the approved FinOps scope
-- Manage budget tags
+- Create, tag, modify, or terminate the Terraform-managed WorkSpace within the approved WorkSpaces scope
 
-The apply role can be assumed only by the approved repository workflow using the protected `finops-apply` environment.
+Apply roles can be assumed only by approved repository workflows using protected GitHub environments such as `finops-apply` and `workspaces-apply`.
 
 The model separates:
 
@@ -517,7 +574,7 @@ Permissions policy -> what the role may do
 
 ## GitHub Environment Protection
 
-The `finops-apply` GitHub environment provides a manual deployment gate.
+The `finops-apply` and `workspaces-apply` GitHub environments provide manual deployment gates.
 
 Controls include:
 
@@ -526,7 +583,7 @@ Controls include:
 - Apply job blocked until approval
 - Environment-specific OIDC identity used by the AWS trust policy
 
-The reviewer can inspect the completed plan-job log and download `finops-plan.txt` before approving deployment.
+The reviewer can inspect the completed plan-job log and download the readable plan artifact, such as `finops-plan.txt` or `workspaces-plan.txt`, before approving deployment.
 
 ---
 
@@ -561,6 +618,8 @@ FINOPS_BUDGET_NAME
 FINOPS_BUDGET_LIMIT
 AWS_FINOPS_PLAN_ROLE_ARN
 AWS_FINOPS_APPLY_ROLE_ARN
+AWS_WORKSPACES_PLAN_ROLE_ARN
+AWS_WORKSPACES_APPLY_ROLE_ARN
 ```
 
 Sensitive values such as the budget notification email are stored as GitHub Actions secrets rather than committed to the repository.
@@ -587,7 +646,7 @@ Provides safe example values. Real `terraform.tfvars` files are ignored.
 
 ### `outputs.tf`
 
-Exposes useful resource values such as instance IDs, IP addresses, security group IDs, alarm ARNs, and budget identifiers.
+Exposes useful resource values such as instance IDs, IP addresses, security group IDs, alarm ARNs, budget identifiers, and WorkSpaces IDs, IP addresses, and states.
 
 ### `.terraform.lock.hcl`
 
@@ -639,6 +698,8 @@ lab/compute/terraform.tfstate
 lab/network/terraform.tfstate
 lab/storage/terraform.tfstate
 lab/finops/terraform.tfstate
+lab/workspaces/terraform.tfstate
+lab/workspaces/terraform.tfstate
 ```
 
 ---
@@ -691,6 +752,9 @@ This project demonstrates practical Terraform, AWS, Git, and CI/CD skills:
 - CloudWatch Metrics Insights alarm creation
 - SNS and Lambda action integration
 - AWS Budget management
+- Amazon WorkSpaces Personal deployment
+- Reusable WorkSpaces module design
+- Multi-region Terraform deployment pattern
 - Declarative resource import
 - Standardized tagging and naming
 - Feature-branch and pull-request workflow
@@ -706,6 +770,7 @@ This project demonstrates practical Terraform, AWS, Git, and CI/CD skills:
 - Safe incremental infrastructure changes
 - GitHub-safe handling of sensitive values
 - Post-deployment state and drift verification
+- Terraform taint handling and state reconciliation after provisioning timeout
 
 ---
 
@@ -743,5 +808,6 @@ Planned enhancements include:
 - Add AWS Systems Manager Session Manager access patterns
 - Add additional CloudWatch alarms
 - Add more FinOps resources and budget types
+- Add WorkSpaces post-deployment smoke testing
 - Add automated post-apply validation
 - Add architecture diagrams and dashboard screenshots
