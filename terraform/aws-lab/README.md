@@ -35,7 +35,7 @@ Current capabilities include:
 - S3 storage resource management
 - AWS Budget management through a dedicated FinOps stack
 - Amazon WorkSpaces Personal deployment through a dedicated WorkSpaces stack
-- Reusable WorkSpaces module for AWS-provided Windows bundles
+- Reusable WorkSpaces module for AWS-provided Windows bundles and AutoStop configuration
 - Import of an existing manually created AWS Budget into Terraform state
 - Remote Terraform state stored in S3
 - Separate state files for compute, network, storage, FinOps, and WorkSpaces stacks
@@ -193,7 +193,7 @@ terraform/aws-lab/modules/
 | `ec2-instance` | Creates standardized EC2 instances using AMI, instance type, subnet, security groups, IAM instance profile, naming, and tags |
 | `security-group` | Creates security groups with separate ingress and egress rule resources |
 | `cloudwatch-metric-alarm` | Creates CloudWatch metric alarms using metric-query expressions |
-| `workspaces-personal` | Creates an Amazon WorkSpaces Personal desktop using an existing registered directory, AWS bundle, user, AutoStop settings, and tags |
+| `workspaces-personal` | Creates an Amazon WorkSpaces Personal desktop using an existing registered directory, AWS bundle, user, AutoStop settings, sizing, and tags |
 
 The modules do not hardcode lab-specific values. Environment-specific details are passed in from the root stacks.
 
@@ -242,7 +242,6 @@ lab/compute/terraform.tfstate
 lab/network/terraform.tfstate
 lab/storage/terraform.tfstate
 lab/finops/terraform.tfstate
-lab/workspaces/terraform.tfstate
 lab/workspaces/terraform.tfstate
 ```
 
@@ -357,6 +356,7 @@ The provider configuration supports both:
 
 ---
 
+
 ## WorkSpaces Stack
 
 Path:
@@ -365,7 +365,7 @@ Path:
 terraform/aws-lab/envs/lab/workspaces
 ```
 
-The WorkSpaces stack manages an Amazon WorkSpaces Personal desktop through a reusable Terraform module.
+The WorkSpaces stack manages an Amazon WorkSpaces Personal desktop through the reusable `workspaces-personal` Terraform module. The stack uses an existing Simple AD-backed WorkSpaces directory, an existing registered WorkSpaces directory, an AWS-provided Windows bundle, and an existing directory user.
 
 Current deployment characteristics:
 
@@ -379,11 +379,9 @@ Running mode: AUTO_STOP
 AutoStop:     60 minutes
 ```
 
-The stack uses an existing AWS Directory Service directory, an existing registered WorkSpaces directory, an AWS-provided WorkSpaces bundle, and an existing directory user. Terraform manages the WorkSpace resource, tags, sizing, AutoStop configuration, and state outputs.
+Terraform manages the WorkSpace resource, tags, compute sizing, root and user volume sizing, AutoStop configuration, and outputs such as WorkSpace ID, private IP address, and state. The WorkSpaces resources are deployed in `us-east-1`, while the Terraform state bucket remains in `us-east-2`.
 
-The WorkSpaces deployment is intentionally separated from the existing Ohio-based infrastructure because Simple AD availability required the WorkSpaces resources to be deployed in `us-east-1`, while the Terraform state bucket remains in `us-east-2`.
-
-The WorkSpaces workflow also demonstrated operational state handling after an AWS-side provisioning timeout. The WorkSpace was validated in AWS, Terraform taint was removed after confirming the resource was healthy, and the remote state outputs were reconciled through the GitHub Actions deployment workflow.
+The WorkSpaces deployment also demonstrated operational state handling after an AWS-side provisioning timeout. The WorkSpace was validated in AWS, Terraform taint was removed after confirming the resource was healthy, and state/output reconciliation was completed through the GitHub Actions deployment workflow.
 
 ---
 
@@ -443,7 +441,7 @@ It performs:
 
 The FinOps PR plan allows reviewers to inspect intended AWS changes before code is merged.
 
-### Protected Plan and Apply Workflow
+### Protected Plan and Apply Workflows
 
 Workflows:
 
@@ -452,7 +450,7 @@ Workflows:
 .github/workflows/terraform-workspaces-apply.yml
 ```
 
-The deployment workflows are started manually from `main` and use two separate jobs: a plan job and an apply job.
+The deployment workflows are started manually from `main` and use two separate jobs.
 
 #### Plan job
 
@@ -478,7 +476,7 @@ workspaces-plan.txt
 The apply job:
 
 1. Depends on successful completion of the plan job
-2. Waits at the protected `finops-apply` GitHub environment
+2. Waits at the protected GitHub environment, such as `finops-apply` or `workspaces-apply`
 3. Requires a reviewer to inspect and approve the plan
 4. Assumes the separate apply role through OIDC
 5. Downloads the exact saved binary plan
@@ -507,11 +505,11 @@ Manual deployment workflow
         ↓
 Saved plan generated and published
         ↓
-Reviewer inspects the generated plan text artifact
+Reviewer inspects the readable plan artifact
         ↓
 Protected environment approval
         ↓
-Exact saved Terraform plan is applied
+Exact saved `.tfplan` artifact is applied
         ↓
 Remote Terraform state updated
 ```
@@ -534,7 +532,7 @@ AWS STS
 Temporary role credentials
 ```
 
-Plan and apply IAM roles enforce separation of duties:
+Two IAM roles enforce separation of duties:
 
 ```text
 GitHubActions-Terraform-FinOps-Plan
@@ -545,11 +543,11 @@ GitHubActions-Terraform-Lab-Apply
 
 ### Plan role
 
-The plan role is intended for lower-risk read and planning activity. Depending on the stack, it can read:
+The plan role is intended for lower-risk read and planning activity. It can read:
 
-- Terraform remote state
-- AWS Budget configuration
-- WorkSpaces directory, bundle, tag, and WorkSpace metadata
+- The relevant Terraform state
+- AWS Budget resources for FinOps planning
+- WorkSpaces directory, bundle, tag, and WorkSpace metadata for WorkSpaces planning
 - AWS account identity
 
 ### Apply role
@@ -559,9 +557,10 @@ The apply role can:
 - Read and update the relevant Terraform state
 - Create and remove the S3 state-lock object
 - Manage AWS Budgets within the approved FinOps scope
-- Create, tag, modify, or terminate the Terraform-managed WorkSpace within the approved WorkSpaces scope
+- Manage WorkSpaces resources within the approved WorkSpaces scope
+- Manage resource tags
 
-Apply roles can be assumed only by approved repository workflows using protected GitHub environments such as `finops-apply` and `workspaces-apply`.
+The apply roles can be assumed only by approved repository workflows using protected environments such as `finops-apply` and `workspaces-apply`.
 
 The model separates:
 
@@ -646,7 +645,7 @@ Provides safe example values. Real `terraform.tfvars` files are ignored.
 
 ### `outputs.tf`
 
-Exposes useful resource values such as instance IDs, IP addresses, security group IDs, alarm ARNs, budget identifiers, and WorkSpaces IDs, IP addresses, and states.
+Exposes useful resource values such as instance IDs, IP addresses, security group IDs, alarm ARNs, budget identifiers, and WorkSpace IDs/states.
 
 ### `.terraform.lock.hcl`
 
@@ -698,7 +697,6 @@ lab/compute/terraform.tfstate
 lab/network/terraform.tfstate
 lab/storage/terraform.tfstate
 lab/finops/terraform.tfstate
-lab/workspaces/terraform.tfstate
 lab/workspaces/terraform.tfstate
 ```
 
@@ -753,8 +751,7 @@ This project demonstrates practical Terraform, AWS, Git, and CI/CD skills:
 - SNS and Lambda action integration
 - AWS Budget management
 - Amazon WorkSpaces Personal deployment
-- Reusable WorkSpaces module design
-- Multi-region Terraform deployment pattern
+- AWS Directory Service-backed WorkSpaces integration
 - Declarative resource import
 - Standardized tagging and naming
 - Feature-branch and pull-request workflow
@@ -763,6 +760,7 @@ This project demonstrates practical Terraform, AWS, Git, and CI/CD skills:
 - GitHub Actions artifacts
 - Saved-plan review and exact-plan apply
 - Protected deployment approval
+- Terraform state reconciliation after AWS-side provisioning timeout
 - OIDC federation between GitHub and AWS
 - Short-lived AWS credentials
 - Separate plan and apply IAM roles
@@ -770,7 +768,6 @@ This project demonstrates practical Terraform, AWS, Git, and CI/CD skills:
 - Safe incremental infrastructure changes
 - GitHub-safe handling of sensitive values
 - Post-deployment state and drift verification
-- Terraform taint handling and state reconciliation after provisioning timeout
 
 ---
 
@@ -808,6 +805,6 @@ Planned enhancements include:
 - Add AWS Systems Manager Session Manager access patterns
 - Add additional CloudWatch alarms
 - Add more FinOps resources and budget types
-- Add WorkSpaces post-deployment smoke testing
+- Expand WorkSpaces automation to include directory/user lifecycle where appropriate
 - Add automated post-apply validation
 - Add architecture diagrams and dashboard screenshots
