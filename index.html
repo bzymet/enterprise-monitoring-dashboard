@@ -242,6 +242,10 @@ iframe {
         Low VMemory
     </a>
 
+    <a href="./MongoDB/mongodb-report.html" target="_blank">
+        MongoDB
+    </a>
+
 </div>
 
     <div class="main-content">
@@ -364,6 +368,18 @@ iframe {
             <div class="kpi-card">
 
                 <div class="kpi-title">
+                    MongoDB Status
+                </div>
+
+                <div class="kpi-value" id="mongoDbStatus">
+                    --
+                </div>
+
+            </div>
+
+            <div class="kpi-card">
+
+                <div class="kpi-title">
                     Overall System Status
                 </div>
 
@@ -433,6 +449,16 @@ iframe {
     <iframe
         src="./LowVmem/lowvmem-report.html"
         scrolling="yes">
+    </iframe>
+
+</div>
+
+<div class="panel">
+
+    <iframe
+        src="./MongoDB/mongodb-report.html"
+        scrolling="yes"
+        title="MongoDB Monitoring Dashboard">
     </iframe>
 
 </div>
@@ -528,6 +554,20 @@ const lowVmemResponse =
 
 const lowVmemData =
     await lowVmemResponse.json();
+
+
+// =========================
+// LOAD MONGODB
+// =========================
+
+const mongoDbResponse =
+    await fetch(
+        './MongoDB/mongodb-summary.json?t=' +
+        new Date().getTime()
+    );
+
+const mongoDbData =
+    await mongoDbResponse.json();
 	
 
         document.getElementById('latencyCount').innerText =
@@ -551,12 +591,39 @@ const lowVmemData =
 	document.getElementById('lowVmemAlerts').innerText =
     lowVmemData.LowVmemAlerts;
 
+
+const mongoDbStatusElement =
+    document.getElementById('mongoDbStatus');
+
+mongoDbStatusElement.innerText =
+    mongoDbData.Status;
+
+mongoDbStatusElement.classList.remove(
+    'status-good',
+    'status-warning',
+    'status-critical'
+);
+
+if (mongoDbData.Status === 'CRITICAL')
+{
+    mongoDbStatusElement.classList.add('status-critical');
+}
+else if (mongoDbData.Status === 'WARNING')
+{
+    mongoDbStatusElement.classList.add('status-warning');
+}
+else
+{
+    mongoDbStatusElement.classList.add('status-good');
+}
+
         console.log(latencyData);
 console.log(esxData);
 console.log(citrixData);
 console.log(vmData);
 console.log(downData);
 console.log(lowVmemData);
+console.log(mongoDbData);
 		
 		
 		let overallStatus = "HEALTHY";
@@ -567,7 +634,8 @@ console.log(lowVmemData);
             citrixData.Status === "CRITICAL" ||
 			vmData.Status === "CRITICAL" ||
 			downData.Status === "CRITICAL" ||
-			lowVmemData.Status === "CRITICAL"
+			lowVmemData.Status === "CRITICAL" ||
+            mongoDbData.Status === "CRITICAL"
         )
         {
             overallStatus = "CRITICAL";
@@ -578,7 +646,8 @@ console.log(lowVmemData);
             citrixData.Status === "WARNING" ||
             vmData.Status === "WARNING" ||
 			downData.Status === "WARNING" ||
-			lowVmemData.Status === "WARNING"
+			lowVmemData.Status === "WARNING" ||
+            mongoDbData.Status === "WARNING"
         )
         {
             overallStatus = "WARNING";
