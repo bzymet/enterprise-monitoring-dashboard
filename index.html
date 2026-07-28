@@ -246,6 +246,10 @@ iframe {
         MongoDB
     </a>
 
+    <a href="./SQL/sql-tempdb-report.html" target="_blank">
+        SQL TempDB
+    </a>
+
 </div>
 
     <div class="main-content">
@@ -380,6 +384,18 @@ iframe {
             <div class="kpi-card">
 
                 <div class="kpi-title">
+                    SQL TempDB Status
+                </div>
+
+                <div class="kpi-value" id="sqlTempDbStatus">
+                    --
+                </div>
+
+            </div>
+
+            <div class="kpi-card">
+
+                <div class="kpi-title">
                     Overall System Status
                 </div>
 
@@ -459,6 +475,16 @@ iframe {
         src="./MongoDB/mongodb-report.html"
         scrolling="yes"
         title="MongoDB Monitoring Dashboard">
+    </iframe>
+
+</div>
+
+<div class="panel">
+
+    <iframe
+        src="./SQL/sql-tempdb-report.html"
+        scrolling="yes"
+        title="SQL TempDB Monitoring Dashboard">
     </iframe>
 
 </div>
@@ -568,6 +594,20 @@ const mongoDbResponse =
 
 const mongoDbData =
     await mongoDbResponse.json();
+
+
+// =========================
+// LOAD SQL TEMPDB
+// =========================
+
+const sqlTempDbResponse =
+    await fetch(
+        './SQL/sql-tempdb-summary.json?t=' +
+        new Date().getTime()
+    );
+
+const sqlTempDbData =
+    await sqlTempDbResponse.json();
 	
 
         document.getElementById('latencyCount').innerText =
@@ -617,6 +657,32 @@ else
     mongoDbStatusElement.classList.add('status-good');
 }
 
+
+const sqlTempDbStatusElement =
+    document.getElementById('sqlTempDbStatus');
+
+sqlTempDbStatusElement.innerText =
+    sqlTempDbData.Status;
+
+sqlTempDbStatusElement.classList.remove(
+    'status-good',
+    'status-warning',
+    'status-critical'
+);
+
+if (sqlTempDbData.Status === 'CRITICAL')
+{
+    sqlTempDbStatusElement.classList.add('status-critical');
+}
+else if (sqlTempDbData.Status === 'WARNING')
+{
+    sqlTempDbStatusElement.classList.add('status-warning');
+}
+else
+{
+    sqlTempDbStatusElement.classList.add('status-good');
+}
+
         console.log(latencyData);
 console.log(esxData);
 console.log(citrixData);
@@ -624,6 +690,7 @@ console.log(vmData);
 console.log(downData);
 console.log(lowVmemData);
 console.log(mongoDbData);
+console.log(sqlTempDbData);
 		
 		
 		let overallStatus = "HEALTHY";
@@ -635,7 +702,8 @@ console.log(mongoDbData);
 			vmData.Status === "CRITICAL" ||
 			downData.Status === "CRITICAL" ||
 			lowVmemData.Status === "CRITICAL" ||
-            mongoDbData.Status === "CRITICAL"
+            mongoDbData.Status === "CRITICAL" ||
+            sqlTempDbData.Status === "CRITICAL"
         )
         {
             overallStatus = "CRITICAL";
@@ -647,7 +715,8 @@ console.log(mongoDbData);
             vmData.Status === "WARNING" ||
 			downData.Status === "WARNING" ||
 			lowVmemData.Status === "WARNING" ||
-            mongoDbData.Status === "WARNING"
+            mongoDbData.Status === "WARNING" ||
+            sqlTempDbData.Status === "WARNING"
         )
         {
             overallStatus = "WARNING";
