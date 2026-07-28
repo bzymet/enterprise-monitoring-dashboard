@@ -1,0 +1,322 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="60">
+<title>Active Directory DOMAIN CONTROLLER HEALTH</title>
+<style>
+
+html {
+    zoom: 85%;
+}
+
+body { margin: 0; background: #06101f; color: white; font-family: Segoe UI, Arial, sans-serif; }
+.dashboard { padding: 14px; }
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.header h1 { font-size: 18px; margin: 0; font-weight: 700; }
+.live { color: #00ff99; font-size: 12px; font-weight: bold; text-shadow: 0 0 8px #00ff99; }
+.live-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #00ff99;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.live-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #00ff99;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ff99;
+}
+
+.developer-credit {
+    color: #7d8fb3;
+    font-size: 11px;
+    font-weight: normal;
+}
+.metrics {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 6px 10px;
+    margin-bottom: 8px;
+}
+.card {
+    border: 1px solid #1e3a5f;
+    border-radius: 5px;
+    background: #0d182a;
+    padding: 6px 8px;
+    min-height: 30px;
+}
+.card-title { font-size: 10px; color: #7db7ff; margin-bottom: 4px; }
+.card-value { font-size: 15px; font-weight: bold; }
+.warning { color: #ffcc00 !important; font-weight: bold; }
+.critical { color: #ff3b3b !important; font-weight: bold; }
+.healthy { color: #00ff99 !important; font-weight: bold; }
+table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 11px; }
+th { background: #174982; color: white; text-align: left; padding: 8px; white-space: nowrap; }
+td { padding: 8px; border-bottom: 1px solid #1b2d49; white-space: nowrap; }
+.footer { margin-top: 14px; font-size: 10px; color: #5f86bd; }
+
+@media screen and (max-width: 1200px) {
+    .metrics {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+</style>
+</head>
+<body>
+<div class="dashboard">
+<div class="header">
+    <div class="title">
+        DOMAIN CONTROLLER HEALTH
+    </div>
+
+    <div class="live-indicator">
+
+    <span class="developer-credit">
+        Designed by Brian Zymet
+    </span>
+
+        <div class="live-dot"></div>
+
+        LIVE
+
+    </div>
+</div>
+
+<div class="metrics">
+    <div class="card"><div class="card-title">Overall Status</div><div class="card-value critical">Critical</div></div>
+    <div class="card"><div class="card-title">Total DCs</div><div class="card-value">10</div></div>
+    <div class="card"><div class="card-title">Healthy DCs</div><div class="card-value healthy">5</div></div>
+    <div class="card"><div class="card-title">Critical DCs</div><div class="card-value critical">3</div></div>
+    <div class="card"><div class="card-title">Failed Logons</div><div class="card-value warning">816</div></div>
+    <div class="card"><div class="card-title">Account Lockouts</div><div class="card-value warning">31</div></div>
+    <div class="card"><div class="card-title">NTLM Events</div><div class="card-value warning">3494</div></div>
+    <div class="card"><div class="card-title">Kerberos Failures</div><div class="card-value critical">37</div></div>
+    <div class="card"><div class="card-title">Replication Failures</div><div class="card-value critical">3</div></div>
+    <div class="card"><div class="card-title">Privileged Group Changes</div><div class="card-value critical">4</div></div>
+    <div class="card"><div class="card-title">Avg DNS Response ms</div><div class="card-value">210.5</div></div>
+    <div class="card"><div class="card-title">Avg LDAP Response ms</div><div class="card-value">235.7</div></div>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>DC</th><th>Site</th><th>Success</th><th>Failed</th><th>Lockouts</th><th>Kerb %</th><th>NTLM %</th><th>Kerb Fail</th><th>Repl Fail</th><th>DNS ms</th><th>LDAP ms</th><th>Services</th><th>CPU %</th><th>Mem %</th><th>Disk Free %</th><th>PDC</th><th>Status</th><th>Likely Cause</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DC07</td>
+<td>Charlotte</td>
+<td>13455</td>
+<td>131</td>
+<td>5</td>
+<td>98.42</td>
+<td>1.58</td>
+<td>8</td>
+<td>0</td>
+<td>19</td>
+<td>1200</td>
+<td>Healthy</td>
+<td>57</td>
+<td>72</td>
+<td>29</td>
+<td>No</td>
+<td class="critical">Critical</td>
+<td class="critical">LDAP response latency</td>
+</tr> <tr>
+<td>DC09</td>
+<td>New York</td>
+<td>16801</td>
+<td>288</td>
+<td>12</td>
+<td>86.75</td>
+<td>13.25</td>
+<td>22</td>
+<td>3</td>
+<td>1225</td>
+<td>1040</td>
+<td>Healthy</td>
+<td>92</td>
+<td>96</td>
+<td>18</td>
+<td>No</td>
+<td class="critical">Critical</td>
+<td class="critical">AD replication failure</td>
+</tr> <tr>
+<td>DC10</td>
+<td>Chicago</td>
+<td>10112</td>
+<td>33</td>
+<td>0</td>
+<td>98.69</td>
+<td>1.31</td>
+<td>0</td>
+<td>0</td>
+<td>20</td>
+<td>14</td>
+<td>Issue: DFSR</td>
+<td>41</td>
+<td>62</td>
+<td>33</td>
+<td>No</td>
+<td class="critical">Critical</td>
+<td class="critical">Critical AD service issue</td>
+</tr> <tr>
+<td>DC03</td>
+<td>Dallas</td>
+<td>15220</td>
+<td>96</td>
+<td>7</td>
+<td>88.93</td>
+<td>11.07</td>
+<td>4</td>
+<td>0</td>
+<td>18</td>
+<td>15</td>
+<td>Healthy</td>
+<td>46</td>
+<td>64</td>
+<td>28</td>
+<td>No</td>
+<td class="warning">Warning</td>
+<td class="warning">Elevated account lockouts</td>
+</tr> <tr>
+<td>DC05</td>
+<td>Phoenix</td>
+<td>11244</td>
+<td>63</td>
+<td>3</td>
+<td>89.53</td>
+<td>10.47</td>
+<td>2</td>
+<td>0</td>
+<td>742</td>
+<td>21</td>
+<td>Healthy</td>
+<td>43</td>
+<td>68</td>
+<td>34</td>
+<td>No</td>
+<td class="warning">Warning</td>
+<td class="warning">Elevated NTLM authentication usage</td>
+</tr> <tr>
+<td>DC01</td>
+<td>Tampa</td>
+<td>18425</td>
+<td>42</td>
+<td>2</td>
+<td>98.0</td>
+<td>2.0</td>
+<td>1</td>
+<td>0</td>
+<td>12</td>
+<td>9</td>
+<td>Healthy</td>
+<td>34</td>
+<td>58</td>
+<td>42</td>
+<td>Yes</td>
+<td class="healthy">Healthy</td>
+<td class="healthy">Normal</td>
+</tr> <tr>
+<td>DC02</td>
+<td>Tampa</td>
+<td>17690</td>
+<td>37</td>
+<td>1</td>
+<td>98.52</td>
+<td>1.48</td>
+<td>0</td>
+<td>0</td>
+<td>14</td>
+<td>11</td>
+<td>Healthy</td>
+<td>39</td>
+<td>61</td>
+<td>36</td>
+<td>No</td>
+<td class="healthy">Healthy</td>
+<td class="healthy">Normal</td>
+</tr> <tr>
+<td>DC04</td>
+<td>Dallas</td>
+<td>14988</td>
+<td>28</td>
+<td>0</td>
+<td>98.85</td>
+<td>1.15</td>
+<td>0</td>
+<td>0</td>
+<td>16</td>
+<td>13</td>
+<td>Healthy</td>
+<td>31</td>
+<td>49</td>
+<td>52</td>
+<td>No</td>
+<td class="healthy">Healthy</td>
+<td class="healthy">Normal</td>
+</tr> <tr>
+<td>DC06</td>
+<td>Phoenix</td>
+<td>10888</td>
+<td>54</td>
+<td>1</td>
+<td>98.61</td>
+<td>1.39</td>
+<td>0</td>
+<td>0</td>
+<td>22</td>
+<td>18</td>
+<td>Healthy</td>
+<td>37</td>
+<td>55</td>
+<td>47</td>
+<td>No</td>
+<td class="healthy">Healthy</td>
+<td class="healthy">Normal</td>
+</tr> <tr>
+<td>DC08</td>
+<td>Charlotte</td>
+<td>12991</td>
+<td>44</td>
+<td>0</td>
+<td>98.43</td>
+<td>1.57</td>
+<td>0</td>
+<td>0</td>
+<td>17</td>
+<td>16</td>
+<td>Healthy</td>
+<td>29</td>
+<td>44</td>
+<td>61</td>
+<td>No</td>
+<td class="healthy">Healthy</td>
+<td class="healthy">Normal</td>
+</tr>
+</tbody>
+</table>
+
+<div class="footer">
+Auto-refresh every 60 seconds | CSV Capture Time: 2026-06-25 10:15:00 | Generated: 2026-07-28 16:02:40
+</div>
+</div>
+</body>
+</html>
