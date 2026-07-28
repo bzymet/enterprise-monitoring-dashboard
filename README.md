@@ -103,6 +103,7 @@ The platforms below were designed not only to provide observability, but also to
 - Low disk space alerting
 - Low virtual memory monitoring
 - SQL and MongoDB availability & performance metrics
+- Active Directory / Domain Controller Health & Performance
 - JSON-based KPI aggregation
 - Responsive dashboard UI
 - Enterprise operational reporting visualizations
