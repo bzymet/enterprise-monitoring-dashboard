@@ -1,0 +1,19 @@
+{
+  "ReplicaSet": "rs-prod",
+  "NodeCount": 3,
+  "HealthyNodes": 3,
+  "UnhealthyNodes": 0,
+  "PrimaryNode": "mongo-prod-01",
+  "ConnectionsCurrent": 754,
+  "ConnectionUtilizationPct": 12.6,
+  "TotalOpsPerSecond": 4030,
+  "AverageQueryLatencyMs": 112.7,
+  "MaximumQueryLatencyMs": 238.0,
+  "TotalSlowQueries": 24,
+  "MaximumReplicationLagSeconds": 18.0,
+  "MaximumCacheUtilizationPct": 88.0,
+  "Status": "WARNING",
+  "CaptureTime": "2026-07-28 09:15:00",
+  "ReportUrl": "mongodb-report.html",
+  "LastUpdated": "2026-07-28 16:15:48"
+}

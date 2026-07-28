@@ -1,0 +1,4 @@
+﻿CaptureTime,ServerName,Port,ReplicaSet,MemberState,Health,ConnectionsCurrent,ConnectionsAvailable,OpsPerSecond,QueryLatencyMs,SlowQueries,ReplicationLagSeconds,CacheUtilizationPct,CpuPct,MemoryPct,DiskUtilizationPct,NetworkInMBps,NetworkOutMBps
+2026-07-28 09:15:00,mongo-prod-01,27017,rs-prod,PRIMARY,1,312,1688,1840,42,3,0,72,38,68,54,18.4,27.9
+2026-07-28 09:15:00,mongo-prod-02,27017,rs-prod,SECONDARY,1,198,1802,1210,58,5,4,76,31,71,57,24.1,14.8
+2026-07-28 09:15:00,mongo-prod-03,27017,rs-prod,SECONDARY,1,244,1756,980,238,16,18,88,67,82,79,21.7,12.9

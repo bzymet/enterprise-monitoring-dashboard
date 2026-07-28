@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta http-equiv="refresh" content="60"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MongoDB Monitoring Dashboard</title><style>
+html{zoom:60%}body{background-color:#050b18;color:white;font-family:'Segoe UI';margin:0;padding:6px}
+.dashboard-container{background:linear-gradient(145deg,#0a1224,#09101f);border:1px solid #1d2b45;border-radius:12px;padding:12px;box-shadow:0 0 30px rgba(0,0,0,.5)}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.title{font-size:20px;font-weight:700}
+.live-indicator{display:flex;align-items:center;gap:10px;color:#00ff99;font-size:14px;font-weight:700}.live-dot{width:10px;height:10px;background:#00ff99;border-radius:50%;box-shadow:0 0 10px #00ff99}
+.kpi-row{display:flex;gap:20px;margin-bottom:10px}.kpi-card{flex:1;background:#0f1729;border:1px solid #223657;border-radius:8px;padding:8px}
+.kpi-title{color:#8ea5cf;font-size:14px}.kpi-value{margin-top:4px;font-size:20px;font-weight:bold}.table-wrapper{overflow-x:auto}
+table{width:100%;min-width:1900px;border-collapse:collapse}th{background:#123c7a;color:white;padding:10px;text-align:left;white-space:nowrap}
+td{padding:14px;border-bottom:1px solid #1d2b45;white-space:nowrap}tr:hover{background:rgba(255,255,255,.03)}
+.healthy{color:#00ff99;font-weight:bold}.critical{color:#ff4d4d;font-weight:bold}.warning{color:#ffaa00;font-weight:bold}
+.footer{margin-top:20px;color:#7d8fb3;font-size:11px}</style></head><body><div class="dashboard-container">
+<div class="header"><div class="title">MONGODB MONITORING</div><div class="live-indicator"><div class="live-dot"></div><span>LIVE</span></div></div>
+<div class="kpi-row">
+<div class="kpi-card"><div class="kpi-title">Replica Set Health</div><div class="kpi-value healthy">3/3 HEALTHY</div></div>
+<div class="kpi-card"><div class="kpi-title">Primary Node</div><div class="kpi-value">mongo-prod-01</div></div>
+<div class="kpi-card"><div class="kpi-title">Connections</div><div class="kpi-value ">754 (12.6%)</div></div>
+<div class="kpi-card"><div class="kpi-title">Total Operations / Sec</div><div class="kpi-value">4030</div></div></div>
+<div class="kpi-row">
+<div class="kpi-card"><div class="kpi-title">Max Replication Lag</div><div class="kpi-value warning">18 sec</div></div>
+<div class="kpi-card"><div class="kpi-title">Average Query Latency</div><div class="kpi-value ">112.7 ms</div></div>
+<div class="kpi-card"><div class="kpi-title">Max WiredTiger Cache</div><div class="kpi-value warning">88%</div></div>
+<div class="kpi-card"><div class="kpi-title">Overall Status</div><div class="kpi-value warning">WARNING</div></div></div>
+<div class="table-wrapper"><table><thead><tr><th>Capture Time</th><th>Server</th><th>Port</th><th>Replica Set</th><th>Member State</th><th>Health</th><th>Connections</th><th>Ops/Sec</th><th>Query Latency ms</th><th>Slow Queries</th><th>Replication Lag sec</th><th>Cache Utilization</th><th>CPU</th><th>Memory</th><th>Disk</th></tr></thead>
+<tbody><tr>
+<td>2026-07-28 09:15:00</td><td>mongo-prod-03</td><td>27017</td>
+<td>rs-prod</td><td>SECONDARY</td>
+<td class="healthy">UP</td><td class="">244 (12.2%)</td>
+<td>980</td><td class="warning">238</td>
+<td class="warning">16</td>
+<td class="warning">18</td>
+<td class="warning">88%</td>
+<td>67%</td><td>82%</td><td>79%</td>
+</tr><tr>
+<td>2026-07-28 09:15:00</td><td>mongo-prod-02</td><td>27017</td>
+<td>rs-prod</td><td>SECONDARY</td>
+<td class="healthy">UP</td><td class="">198 (9.9%)</td>
+<td>1210</td><td class="">58</td>
+<td class="">5</td>
+<td class="">4</td>
+<td class="">76%</td>
+<td>31%</td><td>71%</td><td>57%</td>
+</tr><tr>
+<td>2026-07-28 09:15:00</td><td>mongo-prod-01</td><td>27017</td>
+<td>rs-prod</td><td>PRIMARY</td>
+<td class="healthy">UP</td><td class="">312 (15.6%)</td>
+<td>1840</td><td class="">42</td>
+<td class="">3</td>
+<td class="">0</td>
+<td class="">72%</td>
+<td>38%</td><td>68%</td><td>54%</td>
+</tr></tbody></table></div>
+<div class="footer">Auto-refresh every 60 seconds | Replica Set: rs-prod | CSV Capture Time: 2026-07-28 09:15:00 | Generated: 2026-07-28 16:15:48</div>
+</div></body></html>
