@@ -1,0 +1,6 @@
+"CaptureTime","FreeMB","VersionStoreMB","InternalObjectsMB","UserObjectsMB","session_id","TempdbKB","status","command","cpu_time","total_elapsed_time"
+"2026-06-11 09:45:12","820","120","45","30","57","98240","running","SELECT","1500","32000"
+"2026-06-11 09:45:12","820","120","45","30","63","75400","suspended","HASH MATCH","900","21000"
+"2026-06-11 09:45:12","820","120","45","30","72","50120","running","SORT","600","15000"
+"2026-06-11 09:45:12","820","120","45","30","81","30200","running","SELECT","300","8000"
+"2026-06-11 09:45:12","820","120","45","30","95","18000","suspended","AGGREGATE","200","5000"

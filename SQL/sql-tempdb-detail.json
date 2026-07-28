@@ -1,0 +1,67 @@
+﻿[
+    {
+        "CaptureTime":  "2026-06-11 09:45:12",
+        "FreeMB":  "820",
+        "VersionStoreMB":  "120",
+        "InternalObjectsMB":  "45",
+        "UserObjectsMB":  "30",
+        "session_id":  "57",
+        "TempdbKB":  "98240",
+        "status":  "running",
+        "command":  "SELECT",
+        "cpu_time":  "1500",
+        "total_elapsed_time":  "32000"
+    },
+    {
+        "CaptureTime":  "2026-06-11 09:45:12",
+        "FreeMB":  "820",
+        "VersionStoreMB":  "120",
+        "InternalObjectsMB":  "45",
+        "UserObjectsMB":  "30",
+        "session_id":  "63",
+        "TempdbKB":  "75400",
+        "status":  "suspended",
+        "command":  "HASH MATCH",
+        "cpu_time":  "900",
+        "total_elapsed_time":  "21000"
+    },
+    {
+        "CaptureTime":  "2026-06-11 09:45:12",
+        "FreeMB":  "820",
+        "VersionStoreMB":  "120",
+        "InternalObjectsMB":  "45",
+        "UserObjectsMB":  "30",
+        "session_id":  "72",
+        "TempdbKB":  "50120",
+        "status":  "running",
+        "command":  "SORT",
+        "cpu_time":  "600",
+        "total_elapsed_time":  "15000"
+    },
+    {
+        "CaptureTime":  "2026-06-11 09:45:12",
+        "FreeMB":  "820",
+        "VersionStoreMB":  "120",
+        "InternalObjectsMB":  "45",
+        "UserObjectsMB":  "30",
+        "session_id":  "81",
+        "TempdbKB":  "30200",
+        "status":  "running",
+        "command":  "SELECT",
+        "cpu_time":  "300",
+        "total_elapsed_time":  "8000"
+    },
+    {
+        "CaptureTime":  "2026-06-11 09:45:12",
+        "FreeMB":  "820",
+        "VersionStoreMB":  "120",
+        "InternalObjectsMB":  "45",
+        "UserObjectsMB":  "30",
+        "session_id":  "95",
+        "TempdbKB":  "18000",
+        "status":  "suspended",
+        "command":  "AGGREGATE",
+        "cpu_time":  "200",
+        "total_elapsed_time":  "5000"
+    }
+]

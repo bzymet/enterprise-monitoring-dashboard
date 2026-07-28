@@ -1,0 +1,275 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta http-equiv="refresh" content="60">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SQL TempDB Dashboard</title>
+
+<style>
+
+html {
+    zoom: 60%;
+}
+
+body {
+    background-color: #050b18;
+    color: white;
+    font-family: 'Segoe UI';
+    margin: 0;
+    padding: 6px;
+}
+
+.dashboard-container {
+    background: linear-gradient(145deg,#0a1224,#09101f);
+    border: 1px solid #1d2b45;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 0 30px rgba(0,0,0,.5);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.live-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #00ff99;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.live-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #00ff99;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ff99;
+}
+
+
+.kpi-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.kpi-card {
+    flex: 1;
+    background: #0f1729;
+    border: 1px solid #223657;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.kpi-title {
+    color: #8ea5cf;
+    font-size: 14px;
+}
+
+.kpi-value {
+    margin-top: 4px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #123c7a;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+td {
+    padding: 14px;
+    border-bottom: 1px solid #1d2b45;
+}
+
+tr:hover {
+    background: rgba(255,255,255,.03);
+}
+
+.critical {
+    color: #ff4d4d;
+    font-weight: bold;
+}
+
+.warning {
+    color: #ffaa00;
+    font-weight: bold;
+}
+
+.footer {
+    margin-top: 20px;
+    color: #7d8fb3;
+    font-size: 11px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <div class="header">
+
+        <div class="title">
+            SQL TEMPDB MONITORING
+        </div>
+
+        <div class="live-indicator">
+            <div class="live-dot"></div>
+            <span>LIVE</span>
+        </div>
+
+    </div>
+
+    <div class="kpi-row">
+
+        <div class="kpi-card">
+            <div class="kpi-title">TempDB Free MB</div>
+            <div class="kpi-value warning">820</div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-title">Version Store MB</div>
+            <div class="kpi-value">120</div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-title">Internal Objects MB</div>
+            <div class="kpi-value">45</div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-title">User Objects MB</div>
+            <div class="kpi-value">30</div>
+        </div>
+
+    </div>
+
+    <div class="kpi-row">
+
+        <div class="kpi-card">
+            <div class="kpi-title">Active Sessions</div>
+            <div class="kpi-value">5</div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-title">Top Session TempDB MB</div>
+            <div class="kpi-value critical">95.94</div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-title">Total Session TempDB MB</div>
+            <div class="kpi-value">265.59</div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-title">Overall Status</div>
+            <div class="kpi-value critical">CRITICAL</div>
+        </div>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>Capture Time</th>
+                <th>Session ID</th>
+                <th>TempDB MB</th>
+                <th>Status</th>
+                <th>Command</th>
+                <th>CPU Time</th>
+                <th>Elapsed Time</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+    <td>2026-06-11 09:45:12</td>
+    <td>57</td>
+    <td class='critical'>95.94</td>
+    <td>running</td>
+    <td>SELECT</td>
+    <td>1500</td>
+    <td>32000</td>
+</tr> <tr>
+    <td>2026-06-11 09:45:12</td>
+    <td>63</td>
+    <td class='critical'>73.63</td>
+    <td>suspended</td>
+    <td>HASH MATCH</td>
+    <td>900</td>
+    <td>21000</td>
+</tr> <tr>
+    <td>2026-06-11 09:45:12</td>
+    <td>72</td>
+    <td class='warning'>48.95</td>
+    <td>running</td>
+    <td>SORT</td>
+    <td>600</td>
+    <td>15000</td>
+</tr> <tr>
+    <td>2026-06-11 09:45:12</td>
+    <td>81</td>
+    <td class=''>29.49</td>
+    <td>running</td>
+    <td>SELECT</td>
+    <td>300</td>
+    <td>8000</td>
+</tr> <tr>
+    <td>2026-06-11 09:45:12</td>
+    <td>95</td>
+    <td class=''>17.58</td>
+    <td>suspended</td>
+    <td>AGGREGATE</td>
+    <td>200</td>
+    <td>5000</td>
+</tr>
+
+        </tbody>
+
+    </table>
+
+    <div class="footer">
+
+        Auto-refresh every 60 seconds |
+        CSV Capture Time: 2026-06-11 09:45:12 |
+        Generated: 06/11/2026 09:59:04
+
+    </div>
+
+</div>
+
+</body>
+</html>
+

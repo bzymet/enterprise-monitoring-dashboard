@@ -1,0 +1,12 @@
+﻿{
+    "UserObjectsMB":  30,
+    "CaptureTime":  "2026-06-11 09:45:12",
+    "FreeMB":  820,
+    "TopSessionTempdbMB":  95.94,
+    "InternalObjectsMB":  45,
+    "ActiveSessions":  5,
+    "TotalSessionTempdbMB":  265.59,
+    "Status":  "CRITICAL",
+    "LastUpdated":  "2026-06-11 09:59:04",
+    "VersionStoreMB":  120
+}
