@@ -185,6 +185,21 @@ iframe {
     font-size: 13px;
 }
 
+.full-width-panel {
+    margin-top: 10px;
+    background: linear-gradient(145deg,#0a1224,#09101f);
+    border: 1px solid #1d2b45;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.full-width-panel iframe {
+    width: 100%;
+    height: 620px;
+    border: none;
+    background: #050b18;
+}
+
 .status-good {
     color: #00ff99;
 }
@@ -248,6 +263,10 @@ iframe {
 
     <a href="./SQL/sql-tempdb-report.html" target="_blank">
         SQL TempDB
+    </a>
+
+    <a href="./ADHealth/ad_dc_health_dashboard.html" target="_blank">
+        AD Health
     </a>
 
 </div>
@@ -497,6 +516,16 @@ iframe {
 		
 		
 		
+
+<div class="full-width-panel">
+
+    <iframe
+        src="./ADHealth/ad_dc_health_dashboard.html"
+        scrolling="yes"
+        title="Active Directory Domain Controller Health Dashboard">
+    </iframe>
+
+</div>
 
 <div class="footer">
 
